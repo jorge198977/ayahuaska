@@ -1,0 +1,26 @@
+PASOS PARA PASAR A PRODUCCION
+	
+	PARA EMITIR BOLETAS
+
+- Cambiar en el archivo EnvioBoleta.php ubicado en Clases
+	* funcion getSeed, cambiar $ch = curl_init("https://apicert.sii.cl/recursos/v1/boleta.electronica.semilla"); por $ch = curl_init("https://api.sii.cl/recursos/v1/boleta.electronica.semilla");
+
+	* funcion getToken, cambiar $ch = curl_init("https://apicert.sii.cl/recursos/v1/boleta.electronica.token"); por  $ch = curl_init("https://api.sii.cl/recursos/v1/boleta.electronica.token");
+
+	* funcion enviarNew, cambiar $url='https://pangal.sii.cl/recursos/v1/boleta.electronica.envio'; por $url='https://rahue.sii.cl/recursos/v1/boleta.electronica.envio';
+
+	* funcion consultaBoleta, cambiar $url='https://apicert.sii.cl/recursos/v1/boleta.electronica.envio/'.$rutSender.'-'. $dvSender.'-'.$track.''; por $url='https://api.sii.cl/recursos/v1/boleta.electronica.envio/'.$rutSender.'-'. $dvSender.'-'.$track.'';
+
+	* funcion consultaEstadoBoleta, cambiar $url='https://apicert.sii.cl/recursos/v1/boleta.electronica/'.$rutSender.'-'. $dvSender.'-'.$tipo.'-'.$folio.'/estado?rut_receptor='.$rutRecep.'&dv_receptor='.$dvRecp.'&monto='.$monto.'&fechaEmision='.$fecha.''; por $url='https://api.sii.cl/recursos/v1/boleta.electronica/'.$rutSender.'-'. $dvSender.'-'.$tipo.'-'.$folio.'/estado?rut_receptor='.$rutRecep.'&dv_receptor='.$dvRecp.'&monto='.$monto.'&fechaEmision='.$fecha.'';
+
+
+
+- Cambiar en el archivo Sii.php ubicado en Clases
+	*  En el config 'servidor' => ['palena', 'maullin'], dejar en 'servidor' => ['palena', 'palena']
+	*  En enviar(), ratificar que la ruta de envio no haya cambiado por alguna nueva entregada por la API del SII
+
+
+
+- Cambiar en archivo Autenticacion.php ubicado en Clases/SII
+	* En getSeed(), cambiar $ch = curl_init("https://apicert.sii.cl/recursos/v1/boleta.electronica.semilla"); por $ch = curl_init("https://api.sii.cl/recursos/v1/boleta.electronica.semilla");
+

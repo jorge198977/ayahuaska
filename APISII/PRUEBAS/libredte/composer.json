@@ -1,0 +1,5 @@
+{
+    "require": {
+        "sasco/libredte": "dev-master"
+    }
+}

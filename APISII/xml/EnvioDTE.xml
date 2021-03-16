@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<EnvioBOLETA xmlns="http://www.sii.cl/SiiDte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sii.cl/SiiDte EnvioBOLETA_v11.xsd" version="1.0">
+  <SetDTE ID="LibreDTE_SetDoc">
+    <Caratula version="1.0">
+      <RutEmisor>99500720-7</RutEmisor>
+      <RutEnvia>10932299-7</RutEnvia>
+      <RutReceptor>60803000-K</RutReceptor>
+      <FchResol>2020-11-16</FchResol>
+      <NroResol>0</NroResol>
+      <TmstFirmaEnv>2020-12-02T16:29:29</TmstFirmaEnv>
+      <SubTotDTE>
+        <TpoDTE>39</TpoDTE>
+        <NroDTE>1</NroDTE>
+      </SubTotDTE>
+    </Caratula>
+    <DTE version="1.0">
+  <Documento ID="LibreDTE_T39F1136">
+    <Encabezado>
+      <IdDoc>
+        <TipoDTE>39</TipoDTE>
+        <Folio>1136</Folio>
+        <FchEmis>2020-12-02</FchEmis>
+        <IndServicio>3</IndServicio>
+      </IdDoc>
+      <Emisor>
+        <RUTEmisor>99500720-7</RUTEmisor>
+        <RznSocEmisor>T V CABLE COLOR S A</RznSocEmisor>
+        <GiroEmisor>SERVICIOS DE TELEVISION NO ABIERTA. TELEVISION POR CABLE</GiroEmisor>
+        <DirOrigen>Ovalle</DirOrigen>
+        <CmnaOrigen>Ovalle</CmnaOrigen>
+      </Emisor>
+      <Receptor>
+        <RUTRecep>77123870-K</RUTRecep>
+        <RznSocRecep>COMERCIALIZADORA Y SERVICIOS UNO LIMITADA</RznSocRecep>
+        <DirRecep>Ovalle</DirRecep>
+        <CmnaRecep>Ovalle</CmnaRecep>
+      </Receptor>
+      <Totales>
+        <MntNeto>21008</MntNeto>
+        <IVA>3992</IVA>
+        <MntTotal>25000</MntTotal>
+      </Totales>
+    </Encabezado>
+    <Detalle>
+      <NroLinDet>1</NroLinDet>
+      <NmbItem>Pago mensualidad Diciembre 2020</NmbItem>
+      <QtyItem>1</QtyItem>
+      <PrcItem>25000</PrcItem>
+      <MontoItem>25000</MontoItem>
+    </Detalle>
+    <TED version="1.0">
+  <DD>
+    <RE>99500720-7</RE>
+    <TD>39</TD>
+    <F>1136</F>
+    <FE>2020-12-02</FE>
+    <RR>77123870-K</RR>
+    <RSR>COMERCIALIZADORA Y SERVICIOS UNO LIMITAD</RSR>
+    <MNT>25000</MNT>
+    <IT1>Pago mensualidad Diciembre 2020</IT1>
+    <CAF version="1.0">
+<DA>
+<RE>99500720-7</RE>
+<RS>T V CABLE COLOR S A</RS>
+<TD>39</TD>
+<RNG><D>1101</D><H>1200</H></RNG>
+<FA>2020-11-16</FA>
+<RSAPK><M>vnlOYQUIE8eCRjnErIMn6fZFvDq7VlK4MOL38PIrMaaRbn2zD0XL73+Lnq8J5aViHUF7tHNAmEWu+IcSvrSTFw==</M><E>Aw==</E></RSAPK>
+<IDK>100</IDK>
+</DA>
+<FRMA algoritmo="SHA1withRSA">nPJrPieXqSTukaveoSaY+jJ7E/wPOMjHbTHE3FPwiRTaFb8C3dJfqSSe2NnZljuoDb50VT6WOnMRHicXxkcXnw==</FRMA>
+</CAF>
+    <TSTED>2020-12-02T16:29:29</TSTED>
+  </DD>
+  <FRMT algoritmo="SHA1withRSA">rQDKYBSBy2Es0gOOjkA+2YcqgbXWqH6VPf3pXH332+vmdUTmkFYLb5Dn+gc8j21yKP/G7gjPMavQBEAaz/i6LQ==</FRMT>
+</TED>
+  <TmstFirma>2020-12-02T16:29:29</TmstFirma></Documento>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo xmlns="http://www.w3.org/2000/09/xmldsig#"><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#LibreDTE_T39F1136"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>Hwnkeh4evAlD+ifZbAo6QhSts+g=</DigestValue></Reference></SignedInfo><SignatureValue>OgzhsIYLv/nBNRvbV0/xr2yx62xs99iuHndJFcqoNU9/iKJQOwhvimrvZA1SFYIa
+vejfGqLkD0TPy3age5iGJbE9QVsmze1q5QHxG3smQa1AuV8RL3Rtyue45S+BBwd5
+7kbwsLZHJTgF2qmgL3DylzwKfoj90L6GYLP7SHmExAg=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>tHp7kkDWVe+kOjDix2hAfudGT/wNRL7YUP2T2wCRD9hoQ1oxzcirgPlYq08QZzY1
+VNt+Y05F/Tlta29AvLNatdMqJq+Q22OgAnFG/CKv9Oq/vUpuWoKQ264YfA6Rgff+
+bPn2VJUW5br2eocrmU3RG+zpaM/AkXzD0gSGCFFlhFU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIGVTCCBT2gAwIBAgIKPBglhgAAAAx/RzANBgkqhkiG9w0BAQUFADCB0jELMAkG
+A1UEBhMCQ0wxHTAbBgNVBAgTFFJlZ2lvbiBNZXRyb3BvbGl0YW5hMREwDwYDVQQH
+EwhTYW50aWFnbzEUMBIGA1UEChMLRS1DRVJUQ0hJTEUxIDAeBgNVBAsTF0F1dG9y
+aWRhZCBDZXJ0aWZpY2Fkb3JhMTAwLgYDVQQDEydFLUNFUlRDSElMRSBDQSBGSVJN
+QSBFTEVDVFJPTklDQSBTSU1QTEUxJzAlBgkqhkiG9w0BCQEWGHNjbGllbnRlc0Bl
+LWNlcnRjaGlsZS5jbDAeFw0xODExMjQxMjA0MjhaFw0yMTExMjMxMjA0MjhaMIHW
+MQswCQYDVQQGEwJDTDESMBAGA1UECBMJQ09RVUlNQk8gMQ8wDQYDVQQHEwZMaW1h
+cmkxMjAwBgNVBAoTKUlNUE9SVEFET1JBIFkgRVhQT1JUQURPUkEgQ09NU0FUIExJ
+TUlUQURBMRswGQYDVQQLExJURUxFQ09NVU5JQ0FDSU9ORVMxJjAkBgNVBAMTHVJP
+RFJJR08gQUxFSkFORFJPIEpBUkEgT1ZBTExFMSkwJwYJKoZIhvcNAQkBFhpDT05U
+QUJJTElEQURAQ0FCTEVDT0xPUi5DTDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkC
+gYEAtHp7kkDWVe+kOjDix2hAfudGT/wNRL7YUP2T2wCRD9hoQ1oxzcirgPlYq08Q
+ZzY1VNt+Y05F/Tlta29AvLNatdMqJq+Q22OgAnFG/CKv9Oq/vUpuWoKQ264YfA6R
+gff+bPn2VJUW5br2eocrmU3RG+zpaM/AkXzD0gSGCFFlhFUCAwEAAaOCAqkwggKl
+MIIBTwYDVR0gBIIBRjCCAUIwggE+BggrBgEEAcNSBTCCATAwLQYIKwYBBQUHAgEW
+IWh0dHA6Ly93d3cuZS1jZXJ0Y2hpbGUuY2wvQ1BTLmh0bTCB/gYIKwYBBQUHAgIw
+gfEege4ARQBsACAAcgBlAHMAcABvAG4AZABlAHIAIABlAHMAdABlACAAZgBvAHIA
+bQB1AGwAYQByAGkAbwAgAGUAcwAgAHUAbgAgAHIAZQBxAHUAaQBzAGkAdABvACAA
+aQBuAGQAaQBzAHAAZQBuAHMAYQBiAGwAZQAgAHAAYQByAGEAIABkAGEAcgAgAGkA
+bgBpAGMAaQBvACAAYQBsACAAcAByAG8AYwBlAHMAbwAgAGQAZQAgAGMAZQByAHQA
+aQBmAGkAYwBhAGMAaQDzAG4ALgAgAFAAbwBzAHQAZQByAGkAbwByAG0AZQBuAHQA
+ZQAsMB0GA1UdDgQWBBS5jvDrgzdnmljT5YwqGMYxnod9nTALBgNVHQ8EBAMCBPAw
+IwYDVR0RBBwwGqAYBggrBgEEAcEBAaAMFgoxMDkzMjI5OS03MB8GA1UdIwQYMBaA
+FHjhPp/SErN6PI3NMA5Ts0MpB7NVMD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9j
+cmwuZS1jZXJ0Y2hpbGUuY2wvZWNlcnRjaGlsZWNhRkVTLmNybDA6BggrBgEFBQcB
+AQQuMCwwKgYIKwYBBQUHMAGGHmh0dHA6Ly9vY3NwLmVjZXJ0Y2hpbGUuY2wvb2Nz
+cDA9BgkrBgEEAYI3FQcEMDAuBiYrBgEEAYI3FQiC3IMvhZOMZoXVnReC4twnge/s
+PGGBmucVhq/gFQIBZAIBBDAjBgNVHRIEHDAaoBgGCCsGAQQBwQECoAwWCjk2OTI4
+MTgwLTUwDQYJKoZIhvcNAQEFBQADggEBABSYlKmxE/+lAmOPdxt4EB/6RJO30GfP
+sM5poEedXFju5oOMQJ4QL5vc1K449JML9Qdp4uTmQDrB+yoesuszcpDvUzepcFfE
+3xq0vFHALKBhDH0HKb5662qG2jv1UPR1W2lfMShn8bEiQV5DdVZ3F0lcJT864Us8
+6Dzs3g4DZ3yBw3fjs1bBdrWsUcCUmZ4GfiYZpaTlY93ckcjKsSqUDohIhGc+1uN0
+wa3xSn3aQrG+RS85CxxQqk4ghHY6g5c+fMuj6EpflhIU/zQ6S7XVoF/tmW3QN6kf
+dOBJWrCH6blcelI/mXXLNbib5VOLVIyEEnEi45uWyEio+LfDXd/Rago=</X509Certificate></X509Data></KeyInfo></Signature></DTE>
+  </SetDTE>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo xmlns="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#LibreDTE_SetDoc"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>9gfuA5HYGe2pyFuiyidrpFznFdU=</DigestValue></Reference></SignedInfo><SignatureValue>cRErD0tlU00Yzj1OuYJLs3n8s5jSoh/SkYQEJ7YLd5WQWKDcHbCW9wLsNiWKVNXo
+aUkD2xZ2mWuiuNcAWNsLYHkOiWUbHV1RtzPlboaj2Sqk7B9feLcxmxZpjvHsMkeG
+SmuFmLV1WqzWhppXp1YQo7lsy5BxoAXpHl9Vi03f4zw=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>tHp7kkDWVe+kOjDix2hAfudGT/wNRL7YUP2T2wCRD9hoQ1oxzcirgPlYq08QZzY1
+VNt+Y05F/Tlta29AvLNatdMqJq+Q22OgAnFG/CKv9Oq/vUpuWoKQ264YfA6Rgff+
+bPn2VJUW5br2eocrmU3RG+zpaM/AkXzD0gSGCFFlhFU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIGVTCCBT2gAwIBAgIKPBglhgAAAAx/RzANBgkqhkiG9w0BAQUFADCB0jELMAkG
+A1UEBhMCQ0wxHTAbBgNVBAgTFFJlZ2lvbiBNZXRyb3BvbGl0YW5hMREwDwYDVQQH
+EwhTYW50aWFnbzEUMBIGA1UEChMLRS1DRVJUQ0hJTEUxIDAeBgNVBAsTF0F1dG9y
+aWRhZCBDZXJ0aWZpY2Fkb3JhMTAwLgYDVQQDEydFLUNFUlRDSElMRSBDQSBGSVJN
+QSBFTEVDVFJPTklDQSBTSU1QTEUxJzAlBgkqhkiG9w0BCQEWGHNjbGllbnRlc0Bl
+LWNlcnRjaGlsZS5jbDAeFw0xODExMjQxMjA0MjhaFw0yMTExMjMxMjA0MjhaMIHW
+MQswCQYDVQQGEwJDTDESMBAGA1UECBMJQ09RVUlNQk8gMQ8wDQYDVQQHEwZMaW1h
+cmkxMjAwBgNVBAoTKUlNUE9SVEFET1JBIFkgRVhQT1JUQURPUkEgQ09NU0FUIExJ
+TUlUQURBMRswGQYDVQQLExJURUxFQ09NVU5JQ0FDSU9ORVMxJjAkBgNVBAMTHVJP
+RFJJR08gQUxFSkFORFJPIEpBUkEgT1ZBTExFMSkwJwYJKoZIhvcNAQkBFhpDT05U
+QUJJTElEQURAQ0FCTEVDT0xPUi5DTDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkC
+gYEAtHp7kkDWVe+kOjDix2hAfudGT/wNRL7YUP2T2wCRD9hoQ1oxzcirgPlYq08Q
+ZzY1VNt+Y05F/Tlta29AvLNatdMqJq+Q22OgAnFG/CKv9Oq/vUpuWoKQ264YfA6R
+gff+bPn2VJUW5br2eocrmU3RG+zpaM/AkXzD0gSGCFFlhFUCAwEAAaOCAqkwggKl
+MIIBTwYDVR0gBIIBRjCCAUIwggE+BggrBgEEAcNSBTCCATAwLQYIKwYBBQUHAgEW
+IWh0dHA6Ly93d3cuZS1jZXJ0Y2hpbGUuY2wvQ1BTLmh0bTCB/gYIKwYBBQUHAgIw
+gfEege4ARQBsACAAcgBlAHMAcABvAG4AZABlAHIAIABlAHMAdABlACAAZgBvAHIA
+bQB1AGwAYQByAGkAbwAgAGUAcwAgAHUAbgAgAHIAZQBxAHUAaQBzAGkAdABvACAA
+aQBuAGQAaQBzAHAAZQBuAHMAYQBiAGwAZQAgAHAAYQByAGEAIABkAGEAcgAgAGkA
+bgBpAGMAaQBvACAAYQBsACAAcAByAG8AYwBlAHMAbwAgAGQAZQAgAGMAZQByAHQA
+aQBmAGkAYwBhAGMAaQDzAG4ALgAgAFAAbwBzAHQAZQByAGkAbwByAG0AZQBuAHQA
+ZQAsMB0GA1UdDgQWBBS5jvDrgzdnmljT5YwqGMYxnod9nTALBgNVHQ8EBAMCBPAw
+IwYDVR0RBBwwGqAYBggrBgEEAcEBAaAMFgoxMDkzMjI5OS03MB8GA1UdIwQYMBaA
+FHjhPp/SErN6PI3NMA5Ts0MpB7NVMD4GA1UdHwQ3MDUwM6AxoC+GLWh0dHA6Ly9j
+cmwuZS1jZXJ0Y2hpbGUuY2wvZWNlcnRjaGlsZWNhRkVTLmNybDA6BggrBgEFBQcB
+AQQuMCwwKgYIKwYBBQUHMAGGHmh0dHA6Ly9vY3NwLmVjZXJ0Y2hpbGUuY2wvb2Nz
+cDA9BgkrBgEEAYI3FQcEMDAuBiYrBgEEAYI3FQiC3IMvhZOMZoXVnReC4twnge/s
+PGGBmucVhq/gFQIBZAIBBDAjBgNVHRIEHDAaoBgGCCsGAQQBwQECoAwWCjk2OTI4
+MTgwLTUwDQYJKoZIhvcNAQEFBQADggEBABSYlKmxE/+lAmOPdxt4EB/6RJO30GfP
+sM5poEedXFju5oOMQJ4QL5vc1K449JML9Qdp4uTmQDrB+yoesuszcpDvUzepcFfE
+3xq0vFHALKBhDH0HKb5662qG2jv1UPR1W2lfMShn8bEiQV5DdVZ3F0lcJT864Us8
+6Dzs3g4DZ3yBw3fjs1bBdrWsUcCUmZ4GfiYZpaTlY93ckcjKsSqUDohIhGc+1uN0
+wa3xSn3aQrG+RS85CxxQqk4ghHY6g5c+fMuj6EpflhIU/zQ6S7XVoF/tmW3QN6kf
+dOBJWrCH6blcelI/mXXLNbib5VOLVIyEEnEi45uWyEio+LfDXd/Rago=</X509Certificate></X509Data></KeyInfo></Signature></EnvioBOLETA>
