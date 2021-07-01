@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<EnvioBOLETA xmlns="http://www.sii.cl/SiiDte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sii.cl/SiiDte EnvioBOLETA_v11.xsd" version="1.0">
+  <SetDTE ID="LibreDTE_SetDoc">
+    <Caratula version="1.0">
+      <RutEmisor>76825194-0</RutEmisor>
+      <RutEnvia>23374236-8</RutEnvia>
+      <RutReceptor>60803000-K</RutReceptor>
+      <FchResol>2021-03-22</FchResol>
+      <NroResol>99</NroResol>
+      <TmstFirmaEnv>2021-05-06T20:15:34</TmstFirmaEnv>
+      <SubTotDTE>
+        <TpoDTE>39</TpoDTE>
+        <NroDTE>1</NroDTE>
+      </SubTotDTE>
+    </Caratula>
+    <DTE version="1.0">
+  <Documento ID="LibreDTE_T39F282">
+    <Encabezado>
+      <IdDoc>
+        <TipoDTE>39</TipoDTE>
+        <Folio>282</Folio>
+        <FchEmis>2021-05-06</FchEmis>
+        <IndServicio>3</IndServicio>
+      </IdDoc>
+      <Emisor>
+        <RUTEmisor>76825194-0</RUTEmisor>
+        <RznSocEmisor>SOCIEDAD GASTRONOMICA AYAHUASKA SPA</RznSocEmisor>
+        <GiroEmisor>ACTIVIDADES DE RESTAURANTES Y DE SERVICIO MOVIL DE COMIDAS</GiroEmisor>
+        <DirOrigen>Ovalle</DirOrigen>
+        <CmnaOrigen>Ovalle</CmnaOrigen>
+      </Emisor>
+      <Receptor>
+        <RUTRecep>66666666-6</RUTRecep>
+        <RznSocRecep>Sin RUT</RznSocRecep>
+        <DirRecep>Ovalle</DirRecep>
+        <CmnaRecep>Ovalle</CmnaRecep>
+      </Receptor>
+      <Totales>
+        <MntNeto>22521</MntNeto>
+        <MntExe>3200</MntExe>
+        <IVA>4279</IVA>
+        <MntTotal>30000</MntTotal>
+      </Totales>
+    </Encabezado>
+    <Detalle>
+      <NroLinDet>1</NroLinDet>
+      <NmbItem>PISCO SOUR PERUANO</NmbItem>
+      <QtyItem>2</QtyItem>
+      <PrcItem>3500</PrcItem>
+      <MontoItem>7000</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>2</NroLinDet>
+      <NmbItem>LIMONADA FROZEN VASO</NmbItem>
+      <QtyItem>1</QtyItem>
+      <PrcItem>2000</PrcItem>
+      <MontoItem>2000</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>3</NroLinDet>
+      <NmbItem>CERVEZA ATRAPANIEBLA BROWN ALE</NmbItem>
+      <QtyItem>1</QtyItem>
+      <PrcItem>2900</PrcItem>
+      <MontoItem>2900</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>4</NroLinDet>
+      <NmbItem>TABLA CHICHARRON DE POLLO</NmbItem>
+      <QtyItem>1</QtyItem>
+      <PrcItem>12900</PrcItem>
+      <MontoItem>12900</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>5</NroLinDet>
+      <NmbItem>LIMONADA FROZEN VASO</NmbItem>
+      <QtyItem>1</QtyItem>
+      <PrcItem>2000</PrcItem>
+      <MontoItem>2000</MontoItem>
+    </Detalle>
+    <Detalle>
+      <NroLinDet>6</NroLinDet>
+      <IndExe>1</IndExe>
+      <NmbItem>PROPINA</NmbItem>
+      <QtyItem>1</QtyItem>
+      <PrcItem>3200</PrcItem>
+      <MontoItem>3200</MontoItem>
+    </Detalle>
+    <TED version="1.0">
+  <DD>
+    <RE>76825194-0</RE>
+    <TD>39</TD>
+    <F>282</F>
+    <FE>2021-05-06</FE>
+    <RR>66666666-6</RR>
+    <RSR>Sin RUT</RSR>
+    <MNT>30000</MNT>
+    <IT1>PISCO SOUR PERUANO</IT1>
+    <CAF version="1.0">
+<DA>
+<RE>76825194-0</RE>
+<RS>SOCIEDAD GASTRONOMICA AYAHUASKA SPA</RS>
+<TD>39</TD>
+<RNG><D>1</D><H>6000</H></RNG>
+<FA>2021-04-14</FA>
+<RSAPK><M>vI7Y5bhhXdUd7Rybv9y+6gsJEGop7BskiAVpX9z1uMD8qK8cbSSaIHgWoq68s+YGX3t2uwS+q8ZsIYwcbnKVmQ==</M><E>Aw==</E></RSAPK>
+<IDK>300</IDK>
+</DA>
+<FRMA algoritmo="SHA1withRSA">W8y6K21kc+0fTqipbwvhi4pJI9uf9/8sr0+WQFwSA2mfdC0NyY4Ev2E9i+g0yRtUfpOthBm3jiamAIXgmY8uLw==</FRMA>
+</CAF>
+    <TSTED>2021-05-06T20:15:34</TSTED>
+  </DD>
+  <FRMT algoritmo="SHA1withRSA">T77e5rEqwSU67mBdpR+weB7sPrUybSJiTMnsSQnOWq69B5H/6yeV7GOsIyGW//9xtWUF9lhtNCpSmun+8WjU+g==</FRMT>
+</TED>
+  <TmstFirma>2021-05-06T20:15:34</TmstFirma></Documento>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo xmlns="http://www.w3.org/2000/09/xmldsig#"><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#LibreDTE_T39F282"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>si68YjefuzVNPfBIyGaTn5Aj5rs=</DigestValue></Reference></SignedInfo><SignatureValue>WFlEn2Ylo2emtqfCr6RzwtgDezWxRoYieocCPetvTR+J20Mk/B29vwsxdoODE0DZ
+0/5cKlq78s9G212n4iYPXsWESF5a8v+U0BiaI6gkKr+oS8jsHws/BB17NvpS132j
+nUyv9/6mwkYX4N6adjfZmD7IAgBqnxYmQ9lbEjcXnAA=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>jZv7hQw+RzLy5eiYBugxyy0tuYG4EjMRs8vvCC6DyOaVGuftAdaW8WUAr3iPLGPR
+trtQIwy9LL5u62mYs+C0bErAzGtYcHhSk3IgD4kt/ekZlsSpQLsrV4LT5zGWJQrX
+krYGrEmz5ATnqJywHyHwZHR6p+zvHacWEEc7u2GAyAc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIGOzCCBSOgAwIBAgIKb2ocQAAAAAsawTANBgkqhkiG9w0BAQUFADCB0jELMAkG
+A1UEBhMCQ0wxHTAbBgNVBAgTFFJlZ2lvbiBNZXRyb3BvbGl0YW5hMREwDwYDVQQH
+EwhTYW50aWFnbzEUMBIGA1UEChMLRS1DRVJUQ0hJTEUxIDAeBgNVBAsTF0F1dG9y
+aWRhZCBDZXJ0aWZpY2Fkb3JhMTAwLgYDVQQDEydFLUNFUlRDSElMRSBDQSBGSVJN
+QSBFTEVDVFJPTklDQSBTSU1QTEUxJzAlBgkqhkiG9w0BCQEWGHNjbGllbnRlc0Bl
+LWNlcnRjaGlsZS5jbDAeFw0xODA1MTgxNjQxMDBaFw0yMTA1MTcxNjQxMDBaMIG8
+MQswCQYDVQQGEwJDTDESMBAGA1UECBMJQ09RVUlNQk8gMQ8wDQYDVQQHEwZMaW1h
+cmkxFjAUBgNVBAoTDUFZQUhVQVNLQSBTUEExIDAeBgNVBAsTF1NFUlZJQ0lPUyBH
+QVNUUk9OT01JQ09TMSYwJAYDVQQDEx1FREdBUiBZRVJBUkQgRVNQSU5PWkEgR0VM
+RFJFUzEmMCQGCSqGSIb3DQEJARYXQ09OVEFCSUxJREFEQEFTRURSQUwuQ0wwgZ8w
+DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAI2b+4UMPkcy8uXomAboMcstLbmBuBIz
+EbPL7wgug8jmlRrn7QHWlvFlAK94jyxj0ba7UCMMvSy+butpmLPgtGxKwMxrWHB4
+UpNyIA+JLf3pGZbEqUC7K1eC0+cxliUK15K2BqxJs+QE56icsB8h8GR0eqfs7x2n
+FhBHO7thgMgHAgMBAAGjggKpMIICpTCCAU8GA1UdIASCAUYwggFCMIIBPgYIKwYB
+BAHDUgUwggEwMC0GCCsGAQUFBwIBFiFodHRwOi8vd3d3LmUtY2VydGNoaWxlLmNs
+L0NQUy5odG0wgf4GCCsGAQUFBwICMIHxHoHuAEUAbAAgAHIAZQBzAHAAbwBuAGQA
+ZQByACAAZQBzAHQAZQAgAGYAbwByAG0AdQBsAGEAcgBpAG8AIABlAHMAIAB1AG4A
+IAByAGUAcQB1AGkAcwBpAHQAbwAgAGkAbgBkAGkAcwBwAGUAbgBzAGEAYgBsAGUA
+IABwAGEAcgBhACAAZABhAHIAIABpAG4AaQBjAGkAbwAgAGEAbAAgAHAAcgBvAGMA
+ZQBzAG8AIABkAGUAIABjAGUAcgB0AGkAZgBpAGMAYQBjAGkA8wBuAC4AIABQAG8A
+cwB0AGUAcgBpAG8AcgBtAGUAbgB0AGUALDAdBgNVHQ4EFgQUt94zWdRmLkdOdjTc
+ELgC+32IR18wCwYDVR0PBAQDAgTwMCMGA1UdEQQcMBqgGAYIKwYBBAHBAQGgDBYK
+MjMzNzQyMzYtODAfBgNVHSMEGDAWgBR44T6f0hKzejyNzTAOU7NDKQezVTA+BgNV
+HR8ENzA1MDOgMaAvhi1odHRwOi8vY3JsLmUtY2VydGNoaWxlLmNsL2VjZXJ0Y2hp
+bGVjYUZFUy5jcmwwOgYIKwYBBQUHAQEELjAsMCoGCCsGAQUFBzABhh5odHRwOi8v
+b2NzcC5lY2VydGNoaWxlLmNsL29jc3AwPQYJKwYBBAGCNxUHBDAwLgYmKwYBBAGC
+NxUIgtyDL4WTjGaF1Z0XguLcJ4Hv7DxhgZrnFYav4BUCAWQCAQQwIwYDVR0SBBww
+GqAYBggrBgEEAcEBAqAMFgo5NjkyODE4MC01MA0GCSqGSIb3DQEBBQUAA4IBAQAR
+BDta2BDpRcmmV6eu3rZ2aRErY/HM8mHeXy9nv7T9btSAvXnxSwN/9TNZye8g0Dq6
+EwnerXSEkeTXjfncXn19xj4gTTzioGv4K2vA3DTpjSDN7fsh5rQ9tP4jwZueqXh4
+yQFLz90oejBXhKsZEc3vmJqXXYthZE7PRHPL2kG1Wy5+iKFZLebDsUR34xAHuBbx
+IhPHrOh5V0zZ+HSFqvE8+NnhgXcNWzQjBLURRWpUyV6j56J4d1GIom+kLYJL+cP3
+qmOeoq2cv2FiW4jEqu2K96m2dvDcSH/8aMsAWIlWhn+LNwEp3Yt4mIKs2KSq6XxS
+/s/WrZQpwyDVtns5M9v+</X509Certificate></X509Data></KeyInfo></Signature></DTE>
+  </SetDTE>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo xmlns="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#LibreDTE_SetDoc"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>Ib4sc1XP1uNqUgKlrYNvhDF1aRI=</DigestValue></Reference></SignedInfo><SignatureValue>aKPMGiJyUdefLLIxpgs9+2WI+AjJRqDPPCoqdhb+DO3lU11mx7kqhVHt8UhrPWQd
+du2UluZ5p94ExPOiCcZSFMPQGDSe22Yg4kYxR3YD0uIabisuRu/M13ytLzoSvraG
+C8eENZalG78apRAL03/8kdq8QPjnUxy2xu5/1qDIkgQ=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>jZv7hQw+RzLy5eiYBugxyy0tuYG4EjMRs8vvCC6DyOaVGuftAdaW8WUAr3iPLGPR
+trtQIwy9LL5u62mYs+C0bErAzGtYcHhSk3IgD4kt/ekZlsSpQLsrV4LT5zGWJQrX
+krYGrEmz5ATnqJywHyHwZHR6p+zvHacWEEc7u2GAyAc=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIGOzCCBSOgAwIBAgIKb2ocQAAAAAsawTANBgkqhkiG9w0BAQUFADCB0jELMAkG
+A1UEBhMCQ0wxHTAbBgNVBAgTFFJlZ2lvbiBNZXRyb3BvbGl0YW5hMREwDwYDVQQH
+EwhTYW50aWFnbzEUMBIGA1UEChMLRS1DRVJUQ0hJTEUxIDAeBgNVBAsTF0F1dG9y
+aWRhZCBDZXJ0aWZpY2Fkb3JhMTAwLgYDVQQDEydFLUNFUlRDSElMRSBDQSBGSVJN
+QSBFTEVDVFJPTklDQSBTSU1QTEUxJzAlBgkqhkiG9w0BCQEWGHNjbGllbnRlc0Bl
+LWNlcnRjaGlsZS5jbDAeFw0xODA1MTgxNjQxMDBaFw0yMTA1MTcxNjQxMDBaMIG8
+MQswCQYDVQQGEwJDTDESMBAGA1UECBMJQ09RVUlNQk8gMQ8wDQYDVQQHEwZMaW1h
+cmkxFjAUBgNVBAoTDUFZQUhVQVNLQSBTUEExIDAeBgNVBAsTF1NFUlZJQ0lPUyBH
+QVNUUk9OT01JQ09TMSYwJAYDVQQDEx1FREdBUiBZRVJBUkQgRVNQSU5PWkEgR0VM
+RFJFUzEmMCQGCSqGSIb3DQEJARYXQ09OVEFCSUxJREFEQEFTRURSQUwuQ0wwgZ8w
+DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAI2b+4UMPkcy8uXomAboMcstLbmBuBIz
+EbPL7wgug8jmlRrn7QHWlvFlAK94jyxj0ba7UCMMvSy+butpmLPgtGxKwMxrWHB4
+UpNyIA+JLf3pGZbEqUC7K1eC0+cxliUK15K2BqxJs+QE56icsB8h8GR0eqfs7x2n
+FhBHO7thgMgHAgMBAAGjggKpMIICpTCCAU8GA1UdIASCAUYwggFCMIIBPgYIKwYB
+BAHDUgUwggEwMC0GCCsGAQUFBwIBFiFodHRwOi8vd3d3LmUtY2VydGNoaWxlLmNs
+L0NQUy5odG0wgf4GCCsGAQUFBwICMIHxHoHuAEUAbAAgAHIAZQBzAHAAbwBuAGQA
+ZQByACAAZQBzAHQAZQAgAGYAbwByAG0AdQBsAGEAcgBpAG8AIABlAHMAIAB1AG4A
+IAByAGUAcQB1AGkAcwBpAHQAbwAgAGkAbgBkAGkAcwBwAGUAbgBzAGEAYgBsAGUA
+IABwAGEAcgBhACAAZABhAHIAIABpAG4AaQBjAGkAbwAgAGEAbAAgAHAAcgBvAGMA
+ZQBzAG8AIABkAGUAIABjAGUAcgB0AGkAZgBpAGMAYQBjAGkA8wBuAC4AIABQAG8A
+cwB0AGUAcgBpAG8AcgBtAGUAbgB0AGUALDAdBgNVHQ4EFgQUt94zWdRmLkdOdjTc
+ELgC+32IR18wCwYDVR0PBAQDAgTwMCMGA1UdEQQcMBqgGAYIKwYBBAHBAQGgDBYK
+MjMzNzQyMzYtODAfBgNVHSMEGDAWgBR44T6f0hKzejyNzTAOU7NDKQezVTA+BgNV
+HR8ENzA1MDOgMaAvhi1odHRwOi8vY3JsLmUtY2VydGNoaWxlLmNsL2VjZXJ0Y2hp
+bGVjYUZFUy5jcmwwOgYIKwYBBQUHAQEELjAsMCoGCCsGAQUFBzABhh5odHRwOi8v
+b2NzcC5lY2VydGNoaWxlLmNsL29jc3AwPQYJKwYBBAGCNxUHBDAwLgYmKwYBBAGC
+NxUIgtyDL4WTjGaF1Z0XguLcJ4Hv7DxhgZrnFYav4BUCAWQCAQQwIwYDVR0SBBww
+GqAYBggrBgEEAcEBAqAMFgo5NjkyODE4MC01MA0GCSqGSIb3DQEBBQUAA4IBAQAR
+BDta2BDpRcmmV6eu3rZ2aRErY/HM8mHeXy9nv7T9btSAvXnxSwN/9TNZye8g0Dq6
+EwnerXSEkeTXjfncXn19xj4gTTzioGv4K2vA3DTpjSDN7fsh5rQ9tP4jwZueqXh4
+yQFLz90oejBXhKsZEc3vmJqXXYthZE7PRHPL2kG1Wy5+iKFZLebDsUR34xAHuBbx
+IhPHrOh5V0zZ+HSFqvE8+NnhgXcNWzQjBLURRWpUyV6j56J4d1GIom+kLYJL+cP3
+qmOeoq2cv2FiW4jEqu2K96m2dvDcSH/8aMsAWIlWhn+LNwEp3Yt4mIKs2KSq6XxS
+/s/WrZQpwyDVtns5M9v+</X509Certificate></X509Data></KeyInfo></Signature></EnvioBOLETA>

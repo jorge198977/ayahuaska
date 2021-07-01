@@ -160,7 +160,7 @@ include("intranet/funciones/seguridad.php");
               </div>
             <?php } ?> 
 
-             <?php if(($_SESSION['tipo'] == 9) or ($_SESSION['tipo'] == 1)){ ?>
+             <?php if(($_SESSION['tipo'] == 9) or ($_SESSION['tipo'] == 1) or ($_SESSION['tipo'] == 3)){ ?>
 
               <div class="col-xl-3 col-lg-6">
                 <br>

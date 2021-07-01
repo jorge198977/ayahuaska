@@ -3,7 +3,7 @@ require_once 'Clases/File.php';
 
 function crea_pdf($xml, $nrointerno, $empresa){
 	$fecha_hoy = date("Y-m-d");
-	$dir_pdf = "/var/www/realdev.cl/turquesa/APISII/PDF/TURQUESA/$fecha_hoy";
+	$dir_pdf = "/var/www/realdev.cl/ayahuaska/APISII/PDF/AYAHUSKA/$fecha_hoy";
 	if (!file_exists($dir_pdf)) {
 	    mkdir($dir_pdf, 0777, true);
 	}

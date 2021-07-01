@@ -43,7 +43,7 @@ if($id != 0){
 </div>
 <label for="observacion" class="col-sm-xs-2 control-label">COSTO</label>
 <div class="col-sm-xs-10">
-  <input type="number" name="costo" value="<?php echo $costo ?>" class='form-control' required>
+  <input type="text" name="costo" value="<?php echo $costo ?>" class='form-control' required>
 </div>
 <label for="observacion" class="col-sm-xs-2 control-label">FORMA DESCUENTO</label>
 <div class="col-sm-xs-10">

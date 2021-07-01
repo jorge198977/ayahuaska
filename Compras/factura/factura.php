@@ -38,7 +38,7 @@
         <div class="col-xs-6">
           <h1>
             <a href="https://twitter.com/tahirtaous">
-              <img src="../../assets/img/brand/turquesa.jpg" width="300" heigth="300">
+              <img src="../../assets/img/brand/logo.jpg" width="300" heigth="300">
             </a>
           </h1>
         </div>
@@ -66,7 +66,7 @@
         <div class="col-xs-5 col-xs-offset-2 text-right">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>A : <a href="#">TURQUESA</a></h4>
+              <h4>A : <a href="#">AYAHUASKA</a></h4>
             </div>
             <div class="panel-body">
               <p>

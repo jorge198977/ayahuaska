@@ -75,8 +75,11 @@
                         <thead class="thead-light">
                           <tr>
                             <th scope="col">NOMBRE</th>
+                            <th scope="col">IMG</th>
                             <th scope="col">PRECIO</th>
                             <th scope="col">DESCUENTO</th>
+                            <th scope="col">CATEGORIA</th>
+                            <th scope="col">ORDEN</th>
                             <th scope="col">ACCION</th>
                           </tr>
                         </thead>
@@ -84,6 +87,7 @@
                           <?php
                              foreach ($preparados as $key => $prep) {
                               $prep_descuentos = get_producto_preparados_id_prep($prep['id']);
+                              $estado = get_estado_preparado_by_id($prep['id']);
                           ?> 
                             <tr>
                               <th>
@@ -96,9 +100,21 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <?php echo $prep['nombre'] ?>                                  
                               </th>
+                              <th>
+                               <?php 
+                                  $imagen = get_imagen_preparado_by_id($prep['id']);
+                                  if($imagen != ""){
+                               ?>   
+                               <img src="<?php echo $imagen ?>" alt="..." class="img-thumbnail" width="100" height="100">
+                               <?php
+                                }
+                               ?>
+                              </th>
+
                               <th><?php echo number_format($prep['precio'], 0, ',', '.') ?></th>
                               <th>
                                 <?php
+                                  if(sizeof($prep_descuentos) > 0){
                                   foreach ($prep_descuentos as $key => $prep_descuento) {
                                     $nombre_producto = get_producto($prep_descuento['producto_id']);
                                   ?>
@@ -113,9 +129,21 @@
                                       
                                     <br><br>
                                   <?php
+                                    }
                                   }
                                 ?>
                               </th>
+
+                              <th>
+                              <?php
+                                if($estado == 1){
+                                  echo "ACTIVO";
+                                }
+                                else{
+                                  echo "INACTIVO";
+                                }
+                              ?></th>
+                              <th><?php echo $prep['orden'] ?></th>
                               <th>
                                <!--  <button type="button" onclick='muestra_modal_descuento(<?php echo $prep['id'] ?>, <?php echo $familia_id ?>)' class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
                                 <span class="far fa-clipboard" aria-hidden="true"></span>
@@ -129,6 +157,12 @@
                                 <button type="button" onclick='muestra_modal(<?php echo $prep['id'] ?>, <?php echo $familia_id ?>)' class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
                                 <span class="fas fa-edit" aria-hidden="true"></span>
                                 </button>
+
+                                <a href="ver_imagen_preparado.php?id=<?php echo $prep['id'] ?>&familia_id=<?php echo $familia_id ?>">
+                                 <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="fas fa-images" aria-hidden="true"></span>
+                                </button>
+                                </a>
 
                               </th>
                             </tr>
@@ -230,12 +264,20 @@
   <script src="../../intranet/plugins/datatables/jquery.dataTables.min.js"></script>
 
   <!-- page script -->
-  <script>
-    $(function () {
-       $("#example1").DataTable();
+ <script type="text/javascript">
+    $(document).ready( function () {
+     // $('#myTable').DataTable();
+       $('#example1').DataTable(
+           {
+               "order": [[ 5, "asc" ]],
+               "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+          }
+        );
 
-    });
-  </script>
+     });
+  </script> 
 
   <script src="../../js/bootbox.min.js"></script>
   <script type="text/javascript">

@@ -43,8 +43,8 @@ $seg = date("s");
 $horahoy = $hora.":".$min.":".$seg;
 //echo $horahoy;
 if($turno == 1 ){
-$horario1 =  "00:00:01";
-$horario2 =  "23:59:59";
+$horario1 =  "07:00:01";
+$horario2 =  "05:59:59";
 $ret = dentro_de_horario($horario1, $horario2, $horahoy);
     if($ret == 1){
         echo $sqlinicia = "select * from ayahuaska.usuarios where usuario='".($usuario)."' 
@@ -75,38 +75,38 @@ $ret = dentro_de_horario($horario1, $horario2, $horahoy);
         header('Location:../../index.php?errorHoraFuera');
     }    
 }
-if($turno == 2){
+// if($turno == 2){
 
-$horario1 = "17:00:00";
-$horario2 = "08:59:00";
-$ret = dentro_de_horario($horario1, $horario2, $horahoy);
-    if($ret == 1){
-        $sqlinicia = "select * from ayahuaska.usuarios where usuario='".mysql_real_escape_string($usuario)."' and clave='".mysql_real_escape_string(md5($clave))."'";
-            $resinicia = mysql_query($sqlinicia);
-            $tot = mysql_num_rows($resinicia);
-            if($tot > 0){
-               $datinicia = mysql_fetch_array($resinicia);   
-                        session_start();  
-                        $_SESSION['id']  = $datinicia['id']; 
-                        $_SESSION['nombre']  = $datinicia['nombre']; 
-                        $_SESSION['apellido']  = $datinicia['apellido'];
-                        $_SESSION['usuario'] = $datinicia['usuario'];
-                        $_SESSION['correo'] = $datinicia['correo'];
-                        $_SESSION['nacionalidad'] = $datinicia['Clave'];
-                        $_SESSION['tipo'] = $datinicia['tipo_usuario_id'];
-                        $_SESSION['inicia'] = "ACEPTADO";
-                        $_SESSION['turno'] = $turno;
-                        header('Location:../../inicio.php');
-                        }
-            else {
-               header('Location:../../index.php?error');
-            } 
-    }
-    else{
-        header('Location:../../index.php?errorHoraFuera');
-    }    
+// $horario1 = "17:00:00";
+// $horario2 = "08:59:00";
+// $ret = dentro_de_horario($horario1, $horario2, $horahoy);
+//     if($ret == 1){
+//         $sqlinicia = "select * from ayahuaska.usuarios where usuario='".mysql_real_escape_string($usuario)."' and clave='".mysql_real_escape_string(md5($clave))."'";
+//             $resinicia = mysql_query($sqlinicia);
+//             $tot = mysql_num_rows($resinicia);
+//             if($tot > 0){
+//                $datinicia = mysql_fetch_array($resinicia);   
+//                         session_start();  
+//                         $_SESSION['id']  = $datinicia['id']; 
+//                         $_SESSION['nombre']  = $datinicia['nombre']; 
+//                         $_SESSION['apellido']  = $datinicia['apellido'];
+//                         $_SESSION['usuario'] = $datinicia['usuario'];
+//                         $_SESSION['correo'] = $datinicia['correo'];
+//                         $_SESSION['nacionalidad'] = $datinicia['Clave'];
+//                         $_SESSION['tipo'] = $datinicia['tipo_usuario_id'];
+//                         $_SESSION['inicia'] = "ACEPTADO";
+//                         $_SESSION['turno'] = $turno;
+//                         header('Location:../../inicio.php');
+//                         }
+//             else {
+//                header('Location:../../index.php?error');
+//             } 
+//     }
+//     else{
+//         header('Location:../../index.php?errorHoraFuera');
+//     }    
 
-}
+// }
 
 
 

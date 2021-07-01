@@ -63,6 +63,29 @@
                 </a>
               </div>
             </div>
+             <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <a href="canjes.php">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h3 class="card-title text-uppercase text-muted mb-0">CANJES</h3>
+                        <span class="h2 font-weight-bold mb-0"></span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                          <i class="fa fa-archive"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fa fa-arrow-up"></i></span>
+                      <span class="text-nowrap">Reporte de canje</span>
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <a href="../index.php">

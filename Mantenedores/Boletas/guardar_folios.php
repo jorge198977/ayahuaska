@@ -58,7 +58,8 @@
                   if(isset($_POST['btnguardarfolios'])){
                     //$ambiente = "certificación";
                     $ambiente = "producción";
-                    $carpetaDestino = "../../APISII/xml/empresas/TURQUESA";
+                    $carpetaDestino = "../../APISII/xml/empresas/AYAHUASKA";
+
                     if(file_exists($carpetaDestino) || @mkdir($carpetaDestino)){
                       $archivo = basename($_FILES['folio']['name']); 
                       $extension = pathinfo($archivo, PATHINFO_EXTENSION);
@@ -67,7 +68,8 @@
                       $destino=$carpetaDestino."/".$archivo.".".$extension;
                       $nombre = $archivo.".".$extension;
                       if(move_uploaded_file($origen, $destino)){
-                        $empresa = "76324007-K";
+
+                        $empresa = "76825194-0";
                         $resp = set_folios($empresa, $ambiente, file_get_contents($destino), $nombre);
                       }
                     }

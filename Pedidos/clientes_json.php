@@ -2,7 +2,7 @@
 include("../intranet/funciones/controlador.php");
 if(!empty($_POST["keyword"])) {
   	$dato = $_POST['keyword'];
-  	$sql = "select * from turquesa.socios where nombre like '%".$dato."%' order by nombre asc";
+  	$sql = "select * from ayahuaska.socios where nombre like '%".$dato."%' order by nombre asc";
 	$res = mysql_query($sql);
 	$tot = mysql_num_rows($res);
 

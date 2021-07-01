@@ -128,20 +128,26 @@ class Autenticacion
      * @version 2015-11-03
      */
     public static function getToken($Firma = [])
-    {
+    {   
+
+
         if (!$Firma) return false;
         $semilla = self::getSeed();
+
         if (!$semilla) return false;
         $requestFirmado = self::getTokenRequest($semilla, $Firma);
+
         if (!$requestFirmado) return false;
         $xml = Sii::request('GetTokenFromSeed', 'getToken', $requestFirmado);
+
         if ($xml===false or (string)$xml->xpath('/SII:RESPUESTA/SII:RESP_HDR/ESTADO')[0]!=='00') {
             Log::write(
                 Estado::AUTH_ERROR_TOKEN,
-                Estado::get(\sasco\LibreDTE\Estado::AUTH_ERROR_TOKEN)
+                Estado::get(Estado::AUTH_ERROR_TOKEN)
             );
             return false;
         }
+        echo "djjdjd";
         return (string)$xml->xpath('/SII:RESPUESTA/SII:RESP_BODY/TOKEN')[0];
     }
 

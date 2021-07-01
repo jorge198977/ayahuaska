@@ -31,7 +31,7 @@
             <div class="col">
               <div class="card shadow">
                 <div class="card-header border-0">
-                  <h3 class="mb-0">Próximos Eventos en Turquesa</h3>
+                  <h3 class="mb-0">Próximos Eventos en Ayahuska</h3>
                 </div>
 
                   <div class="tz-gallery">

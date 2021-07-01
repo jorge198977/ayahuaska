@@ -1,4 +1,7 @@
-<?php session_start();   ?>
+<?php session_start(); 
+   error_reporting(E_ALL);
+   ini_set('display_errors', '1');
+  ?>
 <!DOCTYPE html>
 <html>
 
@@ -99,72 +102,74 @@
                                       </thead>
                                       <tbody>
                                         <?php
-                                          foreach ($ventas as $key => $venta) {
-                                            $usuario = get_usuario_id($venta['usuario_id']);
-                                            $mesa = get_mesa_by_id($venta['mesa_id']);
-                                            $ventas_detalles = get_ventas_detalles_id($venta['id']);
+                                          if($ventas != null){
+                                            foreach ($ventas as $key => $venta) {
+                                              $usuario = get_usuario_id($venta['usuario_id']);
+                                              $mesa = get_mesa_by_id($venta['mesa_id']);
+                                              $ventas_detalles = get_ventas_detalles_id($venta['id']);
                                         ?> 
-                                          <tr>
-                                            <td><?php echo $venta['id'] ?></td>
-                                            <td><?php echo $mesa ?></td>
-                                            <td><?php echo $usuario['nombre']." ".$usuario['apellido']; ?></td>
-                                            <td>
-                                              <?php 
-                                                $socio_id = get_vta_socio_id($venta['id']);
-                                                if($socio_id != ""){ 
-                                                    $nombre_socio = get_nombre_socio($socio_id);
-                                                    echo $nombre_socio['nombre']; 
-                                                } 
-                                              ?>
-                                            </td>
-                                            <td>
-                                            <?php  
-                                                $sumatoria_descuento = 0;
-                                                $descuento_puntos = 0;
-                                                foreach ($ventas_detalles as $key => $venta_detalle) {
-                                                  $desc = 0;
-                                                  $preparado = get_preparados_id($venta_detalle['preparado_id']);
-                                                  $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
-                                                  if($descuento_familia['descuento'] != ""){
-                                                    $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
-                                                    if($dentro_horario == 1){
-                                                      $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];
-                                                      $sumatoria_descuento = $sumatoria_descuento + intval($desc);
+                                            <tr>
+                                              <td><?php echo $venta['id'] ?></td>
+                                              <td><?php echo $mesa ?></td>
+                                              <td><?php echo $usuario['nombre']." ".$usuario['apellido']; ?></td>
+                                              <td>
+                                                <?php 
+                                                  $socio_id = get_vta_socio_id($venta['id']);
+                                                  if($socio_id != ""){ 
+                                                      $nombre_socio = get_nombre_socio($socio_id);
+                                                      echo $nombre_socio['nombre']; 
+                                                  } 
+                                                ?>
+                                              </td>
+                                              <td>
+                                              <?php  
+                                                  $sumatoria_descuento = 0;
+                                                  $descuento_puntos = 0;
+                                                  foreach ($ventas_detalles as $key => $venta_detalle) {
+                                                    $desc = 0;
+                                                    $preparado = get_preparados_id($venta_detalle['preparado_id']);
+                                                    $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
+                                                    if($descuento_familia != 0){
+                                                      $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
+                                                      if($dentro_horario == 1){
+                                                        $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];
+                                                        $sumatoria_descuento = $sumatoria_descuento + intval($desc);
+                                                      }
                                                     }
                                                   }
-                                                }
 
-                                                $obtener_descuento = get_descuento_venta($venta['id']);
-                                                if($obtener_descuento != ""){
-                                                  $descu = $obtener_descuento;
-                                                }
-                                                else{
-                                                  $descu = 0;
-                                                }
-                                                  $descuento_puntos = get_descuento_puntos($venta['id']);
-                                                  $monto_venta = obtiene_total_venta($venta['id']);
-                                                  if($monto_venta > 0){
-                                                    echo number_format($monto_venta - $descu - $sumatoria_descuento - $descuento_puntos, 0, ',', '.');
+                                                  $obtener_descuento = get_descuento_venta($venta['id']);
+                                                  if($obtener_descuento != ""){
+                                                    $descu = $obtener_descuento;
                                                   }
                                                   else{
-                                                    echo number_format($monto_venta, 0, ',', '.');
+                                                    $descu = 0;
                                                   }
-                                            ?>  
-                                            </td>
-                                            <td><?php echo substr($venta['fecha'], 8, 2)."-".substr($venta['fecha'], 5, 2)."-".substr($venta['fecha'], 0, 4) ?></td>
-                                            <td align="center">
-                                              <a onclick="muestra_modal_motivo_eliminacion(<?php echo $venta['id'] ?>,<?php echo $venta['mesa_id'] ?>)">
-                                                <button type="button" name="btnelimbeb" value="btnelimbeb" class="btn btn-default" aria-label="Left Align">
-                                                <span class="far fa-trash-alt" aria-hidden="true"></span>
-                                                </button>
-                                              </a>
-                                                <button type="button" onclick='muestra_modal(<?php echo $venta['id'] ?>)' class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
-                                                <span class="far fa-eye" aria-hidden="true"></span>
-                                                </button>
+                                                    $descuento_puntos = get_descuento_puntos($venta['id']);
+                                                    $monto_venta = obtiene_total_venta($venta['id']);
+                                                    if($monto_venta > 0){
+                                                      echo number_format($monto_venta - $descu - $sumatoria_descuento - $descuento_puntos, 0, ',', '.');
+                                                    }
+                                                    else{
+                                                      echo number_format($monto_venta, 0, ',', '.');
+                                                    }
+                                              ?>  
+                                              </td>
+                                              <td><?php echo substr($venta['fecha'], 8, 2)."-".substr($venta['fecha'], 5, 2)."-".substr($venta['fecha'], 0, 4) ?></td>
+                                              <td align="center">
+                                                <a onclick="muestra_modal_motivo_eliminacion(<?php echo $venta['id'] ?>,<?php echo $venta['mesa_id'] ?>)">
+                                                  <button type="button" name="btnelimbeb" value="btnelimbeb" class="btn btn-default" aria-label="Left Align">
+                                                  <span class="far fa-trash-alt" aria-hidden="true"></span>
+                                                  </button>
+                                                </a>
+                                                  <button type="button" onclick='muestra_modal(<?php echo $venta['id'] ?>)' class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
+                                                  <span class="far fa-eye" aria-hidden="true"></span>
+                                                  </button>
 
-                                            </td>
-                                          </tr>
+                                              </td>
+                                            </tr>
                                         <?php
+                                          }
                                         }
                                         ?>
                                       </tbody>
@@ -222,13 +227,13 @@
                                                     $desc = 0;
                                                     $preparado = get_preparados_id($venta_detalle['preparado_id']);
                                                     $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
-                                                    if($descuento_familia['descuento'] != ""){
-                                                      $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
-                                                      if($dentro_horario == 1){
-                                                        $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];
-                                                        $sumatoria_descuento = $sumatoria_descuento + intval($desc);
-                                                      }
-                                                    }
+                                                    // if($descuento_familia != 0){
+                                                    //   $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
+                                                    //   if($dentro_horario == 1){
+                                                    //     $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];
+                                                    //     $sumatoria_descuento = $sumatoria_descuento + intval($desc);
+                                                    //   }
+                                                    // }
                                                   }
 
                                                   $obtener_descuento = get_descuento_venta($venta_cerrada['id']);

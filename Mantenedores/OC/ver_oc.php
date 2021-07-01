@@ -28,7 +28,7 @@
         <div class="col-xs-6">
           <h1>
             <a href="https://twitter.com/#">
-            <img src="../../intranet/images/turquesa.jpg" width="300" heigth="300">
+            <img src="../../../assets/img/brand/logo.jpg" width="300" heigth="300" />
             </a>
           </h1>
         </div>
@@ -41,12 +41,12 @@
         <div class="col-xs-5">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>De : <a href="#">TURQUESA</a></h4>
+              <h4>De : <a href="#">AYAHUASKA</a></h4>
             </div>
             <div class="panel-body">
               <p>
-                Calle: Parcela camino a sotaqui km 5<br>
-                Fono:  +56971035997<br>
+                Dirección : David perry 45<br>
+                Fono:  532622186<br>
                  <br>
               </p>
             </div>
@@ -55,7 +55,7 @@
         <div class="col-xs-5 col-xs-offset-2 text-right">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>A: <a href="#"><?php echo $proveedor['nombre'] ?></a></h4>
+              <h4>A: <a href="#">AYAHUSKA</a></h4>
             </div>
             <div class="panel-body">
               <p>
@@ -130,7 +130,7 @@
                 </strong>
                   <br><br>
                   Fecha Compra: <strong><?php echo fecha_bd_normal($oc['fecha_compra']) ?> </strong><br><br>
-                  Email :  turquesa.ovalle@gmail.com  <br><br>
+                  Email : ayahuaskaovalle@gmail.com <br><br>
                   Web : <a href="//www.realdev.cl" target="_BLANK">SISTEMA REAL</a>
                 </p>
                 

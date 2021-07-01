@@ -1,4 +1,8 @@
-<?php session_start();   ?>
+<?php session_start();   
+
+ error_reporting(E_ALL);
+ ini_set('display_errors', '1');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -89,26 +93,26 @@
                               </td>
                               <td>
                               <?php  
-                                  $sumatoria_descuento = 0;
-                                  foreach ($ventas_detalles as $key => $venta_detalle) {
-                                    $preparado = get_preparados_id($venta_detalle['preparado_id']);
-                                    $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
-                                    if($descuento_familia['descuento'] != ""){
-                                      $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
-                                      if($dentro_horario == 1){
-                                        $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];
-                                        $sumatoria_descuento = $sumatoria_descuento + intval($desc);
-                                      }
-                                    }
-                                  }
-                                  $obtener_descuento = get_descuento_venta($venta['id']);
-                                  if($obtener_descuento != ""){
-                                    $descu = $obtener_descuento;
-                                  }
-                                  else{
-                                    $descu = 0;
-                                  }
-                                  echo number_format(obtiene_total_venta($venta['id']) - $descu - $sumatoria_descuento, 0, ',', '.');
+                                  // $sumatoria_descuento = 0;
+                                  // foreach ($ventas_detalles as $key => $venta_detalle) {
+                                  //   $preparado = get_preparados_id($venta_detalle['preparado_id']);
+                                  //   $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
+                                  //   if($descuento_familia['descuento'] != ""){
+                                  //     $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
+                                  //     if($dentro_horario == 1){
+                                  //       $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];
+                                  //       $sumatoria_descuento = $sumatoria_descuento + intval($desc);
+                                  //     }
+                                  //   }
+                                  // }
+                                  // $obtener_descuento = get_descuento_venta($venta['id']);
+                                  // if($obtener_descuento != ""){
+                                  //   $descu = $obtener_descuento;
+                                  // }
+                                  // else{
+                                  //   $descu = 0;
+                                  // }
+                                  echo number_format(obtiene_total_venta($venta['id']), 0, ',', '.');
                               ?>  
                               </td>
                               <td><?php echo substr($venta['fecha'], 8, 2)."-".substr($venta['fecha'], 5, 2)."-".substr($venta['fecha'], 0, 4) ?></td>
@@ -129,6 +133,11 @@
                                 <button type="button" onclick='muestra_modal(<?php echo $venta['id'] ?>)' class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
                                   <span class="fas fa-eye" aria-hidden="true"></span>
                                   </button>
+                                <a href="solicita_precuenta.php?mov=<?php echo $venta['id'] ?>&mesa=<?php echo $mesa ?>">
+                                  <button type="button" class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
+                                  <span class="fas fa-print " aria-hidden="true"></span>
+                                  </button>
+                                </a>
                               </td>
                             </tr>
                           <?php
@@ -197,12 +206,35 @@
   <script src="../../intranet/plugins/datatables/jquery.dataTables.min.js"></script>
 
   <!-- page script -->
-  <script>
-    $(function () {
-       $("#example1").DataTable();
 
-    });
-  </script>
+
+   <script type="text/javascript">
+    $(document).ready( function () {
+     // $('#myTable').DataTable();
+       $('#example1').DataTable(
+           {
+               "order": [[ 0, "desc" ]],
+               "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+          }
+        );
+
+     });
+  </script> 
+
+
+
+  <script src="../../js/bootbox.min.js"></script>
+<?php 
+    if(isset($_GET['Impreso'])){
+  ?>
+    <script type="text/javascript">
+      bootbox.alert("Detalle impreso!");
+    </script>
+  <?php
+    }
+  ?>
 
 
 </body>

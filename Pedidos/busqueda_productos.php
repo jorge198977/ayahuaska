@@ -29,7 +29,7 @@
 			$dato = $_POST['parametros'];
 
 			$fecha = date("H:i:s");
-			$sqlhora = "select * from turquesa.horahappy where idhorahappy = 1";
+			$sqlhora = "select * from ayahuaska.horahappy where idhorahappy = 1";
 			$reshora = mysql_query($sqlhora);
 			$dathora = mysql_fetch_array($reshora);
 			$horario1 = $dathora['horainicialhappy'];
@@ -37,10 +37,10 @@
 			$ret = dentro_de_horario($horario1, $horario2, $fecha);
 
 			if($ret == 1){
-				$sql = "select * from turquesa.preparados where PREPARADOS_NOMBRE like '%".$dato."%' order by PREPARADOS_NOMBRE asc";
+				$sql = "select * from ayahuaska.preparados where PREPARADOS_NOMBRE like '%".$dato."%' order by PREPARADOS_NOMBRE asc";
 			}
 			else{
-			  $sql = "select * from turquesa.preparados where PREPARADOS_NOMBRE like '%".$dato."%' and PREPARADOS_NOMBRE not like '%HAPPY%' order by PREPARADOS_NOMBRE asc";
+			  $sql = "select * from ayahuaska.preparados where PREPARADOS_NOMBRE like '%".$dato."%' and PREPARADOS_NOMBRE not like '%HAPPY%' order by PREPARADOS_NOMBRE asc";
 			}
 
 			

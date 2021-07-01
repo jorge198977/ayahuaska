@@ -157,121 +157,92 @@
                               <h3 class="mb-0">DETALLE PEDIDO</h3>
                             </div>
 
-                            <?php foreach ($vta_detalles as $key => $vta_detalle) { 
-                              $preparado = get_preparados_id($vta_detalle['preparado_id']);
-                              $tamnombre = strlen($preparado['PREPARADOS_NOMBRE']);
-                              $fam = get_familia($preparado['PREPARADOS_FAMILIA']);
-                              $tamfam = strlen($fam);
-              
-                            ?>
+                            <?php 
+                              if($vta_detalles != null){
+                                foreach ($vta_detalles as $key => $vta_detalle) { 
+                                $preparado = get_preparados_id($vta_detalle['preparado_id']);
+                                $tamnombre = strlen($preparado['PREPARADOS_NOMBRE']);
+                                $fam = get_familia($preparado['PREPARADOS_FAMILIA']);
+                                $tamfam = strlen($fam);
+                
+                              ?>
 
-                                <div class="card card-stats mb-4 mb-lg-0 ma10">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-title text-uppercase text-muted mb-0"></h5>
-                                            <span class="h2 font-weight-bolder mb-0"></span> 
-                                            <span class="badge badge-dot mr-4">
-                                              <span class="badge badge-success">PEDIDO</span>
-                                            </span>
-                                        </div>
-                                        <div class="col-auto">
-                                          <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
-                                              <a class="icon icon-shape bg-primary text-white rounded-circle shadow" onclick="return (confirmDel(<?php echo $vta_detalle['id'] ?>, <?php echo $_GET['Vta_id'] ?>, <?php echo $_GET['npedido'] ?>));">  
-
-                                                  <i class="fas fa-trash-alt"></i>
-                                              </a>
+                                  <div class="card card-stats mb-4 mb-lg-0 ma10">
+                                  <div class="card-body">
+                                      <div class="row">
+                                          <div class="col">
+                                              <h5 class="card-title text-uppercase text-muted mb-0"></h5>
+                                              <span class="h2 font-weight-bolder mb-0"></span> 
+                                              <span class="badge badge-dot mr-4">
+                                                <span class="badge badge-success">PEDIDO</span>
+                                              </span>
                                           </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                      <div class="col-12">
-                                        <p class="mt-0 mb-0 text-muted text-sm">
+                                          <div class="col-auto">
+                                            <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                                                <a class="icon icon-shape bg-primary text-white rounded-circle shadow" onclick="return (confirmDel(<?php echo $vta_detalle['id'] ?>, <?php echo $_GET['Vta_id'] ?>, <?php echo $_GET['npedido'] ?>));">  
 
-                                            <span class="text-nowrap"><i class="fas fa-clipboard-check"></i>&nbsp;<B class="font-weight-bolder">FAMILIA: </B>
-                                              <?php   
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12">
+                                          <p class="mt-0 mb-0 text-muted text-sm">
 
-                                                  if($tamfam > 17) {
-                                                    $descrip1 = substr($fam, 0, 16);
-                                                    $descrip2 = substr($fam, 16, $tamnombre);
-                                                    echo $descrip1. "<br>".$descrip2;
+                                              <span class="text-nowrap"><i class="fas fa-clipboard-check"></i>&nbsp;<B class="font-weight-bolder">FAMILIA: </B>
+                                                <?php   
+
+                                                    if($tamfam > 17) {
+                                                      $descrip1 = substr($fam, 0, 16);
+                                                      $descrip2 = substr($fam, 16, $tamnombre);
+                                                      echo $descrip1. "<br>".$descrip2;
+                                                    }
+                                                    else{
+                                                      echo $fam. "<br>";
+                                                    }
+
+                                                ?>
+                                              </span><br>
+                                              <span class="text-nowrap">
+                                                <?php 
+
+                                                  if($tamnombre > 30) {
+                                                    $descrip1 = substr($preparado['PREPARADOS_NOMBRE'], 0, 29);
+                                                    $descrip2 = substr($preparado['PREPARADOS_NOMBRE'], 29, $tamnombre);
+                                                    echo $vta_detalle['cantidad']." ".$descrip1. "<br>".$descrip2;
                                                   }
                                                   else{
-                                                    echo $fam. "<br>";
+                                                    echo $vta_detalle['cantidad']." ".$preparado['PREPARADOS_NOMBRE']. "<br>";
                                                   }
-
-                                              ?>
-                                            </span><br>
-                                            <span class="text-nowrap">
-                                              <?php 
-
-                                                if($tamnombre > 30) {
-                                                  $descrip1 = substr($preparado['PREPARADOS_NOMBRE'], 0, 29);
-                                                  $descrip2 = substr($preparado['PREPARADOS_NOMBRE'], 29, $tamnombre);
-                                                  echo $vta_detalle['cantidad']." ".$descrip1. "<br>".$descrip2;
-                                                }
-                                                else{
-                                                  echo $vta_detalle['cantidad']." ".$preparado['PREPARADOS_NOMBRE']. "<br>";
-                                                }
-                                              ?>
-                                            </span> 
-                                            <span class="text-nowrap"><i class="fas fa-dollar-sign"></i>&nbsp;
-                                              <B class="font-weight-bolder">
-                                              <?php  
-                                                echo $vta_detalle['cantidad']." X $".number_format($preparado['PREPARADOS_PRECIO'], 0, ',', '.')." = "." $".number_format(((($preparado['PREPARADOS_PRECIO'])*($vta_detalle['cantidad'])) - $desc), 0, ',', '.');  
-                                              ?>
-                                              </B>
-                                            </span>
-                                            <br>
-                                            <span class="text-nowrap"><i class="fas fa-align-center"></i>&nbsp;
-                                              <B class="font-weight-bolder">
-                                              <?php  
-                                                echo $vta_detalle['observacion'];  
-                                              ?>
-                                              </B>
-                                            </span>
-                                        </p>
+                                                ?>
+                                              </span> 
+                                              <span class="text-nowrap"><i class="fas fa-dollar-sign"></i>&nbsp;
+                                                <B class="font-weight-bolder">
+                                                <?php  
+                                                  echo $vta_detalle['cantidad']." X $".number_format($preparado['PREPARADOS_PRECIO'], 0, ',', '.')." = "." $".number_format(((($preparado['PREPARADOS_PRECIO'])*($vta_detalle['cantidad'])) - $desc), 0, ',', '.');  
+                                                ?>
+                                                </B>
+                                              </span>
+                                              <br>
+                                              <span class="text-nowrap"><i class="fas fa-align-center"></i>&nbsp;
+                                                <B class="font-weight-bolder">
+                                                <?php  
+                                                  echo $vta_detalle['observacion'];  
+                                                ?>
+                                                </B>
+                                              </span>
+                                          </p>
+                                        </div>
                                       </div>
-                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                            <?php
+                              <?php
+                              }
                             }
-                            ?>
+                              ?>
 
 
-                            <!-- <div class="table-responsive">
-                              <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                  <tr>
-                                    <th>NOMBRE</th>
-                                    <th>OBSERVACION</th>
-                                    <th>CANTIDAD</th>
-                                    <th>PRECIO</th>
-                                    <th>ELIMINAR</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <?php foreach ($vta_detalles as $key => $vta_detalle) { 
-                                    $preparado = get_preparados_id($vta_detalle['preparado_id']);
-                                  ?>
-                                    <tr>
-                                      <td><?php echo $preparado['PREPARADOS_NOMBRE'] ?></td>
-                                      <td><?php echo $vta_detalle['observacion'] ?></td>
-                                      <td><?php echo $vta_detalle['cantidad'] ?></td>
-                                      <td><?php echo number_format($preparado['PREPARADOS_PRECIO']*$vta_detalle['cantidad'], 0, ',', '.') ?></td>
-                                      <td>
-                                        <a href="../intranet/funciones/procesapedido2.php?Elimpedidotabla2=<?php echo $vta_detalle['id'] ?>&vta_id=<?php echo $_GET['Vta_id'] ?>&npedido=<?php echo $_GET['npedido'] ?>">
-                                          <button type="button" name="btnelimbeb" value="btnelimbeb" class="btn btn-default" aria-label="Left Align">
-                                          <span class="fa fa-window-close" aria-hidden="true"></span>
-                                          </button>
-                                        </a>
-                                      </td>
-                                    </tr>
-                                  <?php } ?>
-                                </tbody>
-                              </table>
-                            </div> -->
                           </div>
                           <?php 
                             $cuenta_vta_detalle = get_count_vta_detalle($_GET['Vta_id']);
@@ -283,11 +254,7 @@
                                 <a href="generapedido2.php?oMov=<?php echo $_GET['Vta_id'] ?>&oNpedido=<?php echo $_GET['npedido'] ?>" onclick="block()">
                                   <button type="button" name="imprimepedido" id="imprimepedido" class="btn btn-success btn-lg btn-block my-4" value="imprimepedido" onClick="this.disabled=true;">IMPRIMIR PEDIDO</button>
                                 </a>
-                               <!--  <button type="button" onclick='muestra_impresoras(<?php echo $_GET['Vta_id'] ?>, <?php echo $_GET['npedido'] ?>)'
-                                class="btn btn-success btn-lg btn-block my-4" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
-                                  <span class="fas fa-print" aria-hidden="true"></span>
-                                </button> -->
-                            
+
                               </nav>
                             </div>
 
@@ -308,27 +275,7 @@
 
 
 
-<div id="myModalImpresora" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <form  name="miform" id="form1" method="post" action="generapedido2.php" >
-        <div class="modal-header">
-          <h4 class="modal-title">SELECCIONA IMPRESORA</h4>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-              <div id="contenidoImpresora"></div>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" name="btnseleccionaimpresora" onClick="return validar()" class="btn btn-success">Seleccionar</button>
-            <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-</div>
+
 
 
 

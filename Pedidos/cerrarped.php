@@ -323,7 +323,7 @@ $(document).ready(function(){
                               <td>
                                 <?php
                                   $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
-                                  if($descuento_familia['descuento'] != ""){
+                                  if($descuento_familia != 0){
                                     $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
                                     if($dentro_horario == 1){
                                       $desc = $descuento_familia['descuento'] * ($venta_detalle['cantidad'] - $cantidad_temporal);
@@ -408,14 +408,14 @@ $(document).ready(function(){
                           <td><strong><h3><?php echo get_forma_pago_id($vta_pago['forma_pago_id']) ?></h3></strong></td>
                           <td><strong><h3><?php echo number_format($vta_pago['valor'], 0, ',', '.') ?></h3></strong></td>
                           <td><strong><h3><?php echo fecha_bd_normal($vta_pago['fecha'])." ".$vta_pago['hora'] ?></h3></strong></td>
-                          <td align="center">
+                          <!-- <td align="center">
                             <button type="button" onclick='muestra_modal_pagado(<?php echo $_GET['Mov'] ?>, <?php echo $vta_pago['id'] ?>)' class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-toggle="modal" data-target="modal" data-whatever="@mdo">
                                   <span class="fas fa-book-reader" aria-hidden="true"></span>
                             </button>
                             <a href="reimprimir_pedido_pagado.php?mov=<?php echo $_GET['Mov'] ?>&vta_pago=<?php echo $vta_pago['id'] ?>" onclick="block()">
                               <button type="button" name="imprimepedido" id="imprimepedido" class="btn btn-success" value="imprimepedido" ><span class="fas fa-print " aria-hidden="true"></span></button>
                             </a>
-                          </td>
+                          </td> -->
                         </tr>
                       <?php 
                           $total_pagado = $total_pagado + $vta_pago['valor'];
@@ -491,11 +491,25 @@ $(document).ready(function(){
                         <center><h2><i class="glyphicon glyphicon-search"></i> 
                           Detalle Pago
                         </h2> </center>
-                        <form method="post" name="frmcerrar" action="../intranet/funciones/procesapedido2.php">
+                        <form method="post" name="frmcerrar" action="#">
+
+
                           <div class="row">
                             <div class="col-md-12">
                               <div class="form-group">
-                                <select class="form-control input-lg" name="fpago" id="fpago" onchange="javascript:mostrarocultocliente()"> 
+                                <select class="form-control input-lg" name="escanje" id="escanje" required> 
+                                  <option value=""> ¿Es canje?</option>
+                                    <option value="0">NO</option>
+                                    <option value="1">SI</option>
+                                </select> 
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <select class="form-control input-lg" name="fpago" id="fpago" required> 
                                   <option value=""> Ingrese forma de pago</option>
                                   <?php 
                                     $formas_pagos = get_all_formas_pagos();
@@ -536,7 +550,7 @@ $(document).ready(function(){
                           </div>
 
 
-                          <?php
+                         <!--  <?php
                             $max_boleta = get_boleta_actual();
                             if($max_boleta == ""){
                               $max_boleta = 1;
@@ -556,7 +570,7 @@ $(document).ready(function(){
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <div class="row">
                             <?php $propina = (($total-$descu-$sumatoria_descuento-$descuento_puntos) * 0.1); ?>
                             <div class="col-md-6">
@@ -718,6 +732,23 @@ $(document).ready(function(){
     function confirmaPago(id){
         var fp = "";
         frmcerrar.btnpagarpedido.disabled = true;
+
+        if(frmcerrar.fpago.value == 0){
+          bootbox.alert("Debe seleccionar forma de pago!");
+          frmcerrar.propina.value = "";
+          frmcerrar.monto_pagado.value = "";
+          return false;
+        }
+
+        if(frmcerrar.escanje.value == ""){
+          bootbox.alert("Debe seleccionar si es canje!");
+          frmcerrar.propina.value = "";
+          frmcerrar.monto_pagado.value = "";
+          return false;
+        }
+
+
+
         if(frmcerrar.fpago.value == 1){ fp = "Efectivo";}if(frmcerrar.fpago.value == 3){ fp = "Cuenta Corriente";}if(frmcerrar.fpago.value == 4){ fp = "Débito";}
         bootbox.confirm({
         message: "Se va a cerrar Pedido Nro <strong> "+id+" </strong> con los siguientes datos:  <br> Forma de Pago: <strong> "+fp+" </strong> <br> Total:  <strong>"+frmcerrar.ototalmenosdescu.value+" </strong> <br> Propina: <strong> "+frmcerrar.propina.value+" </strong> <br> Monto Pagado: <strong> "+frmcerrar.monto_pagado.value+" </strong> <br> Vuelto: <strong> "+frmcerrar.vuelto.value+" </strong> <br> ¿Datos ingresados son correctos?",
@@ -733,7 +764,7 @@ $(document).ready(function(){
         },
         callback: function (result) {
             if(result){
-              location.href = "../intranet/funciones/procesapedido2.php?btnpagarpedido&ototalmenosdescu="+frmcerrar.ototalmenosdescu.value+"&propina="+frmcerrar.propina.value+"&omov="+id+"&omesa="+frmcerrar.omesa.value+"&monto_pagado="+frmcerrar.monto_pagado.value+"&fpago="+frmcerrar.fpago.value+"&nomcli="+frmcerrar.nomcli.value+"&boleta="+frmcerrar.boleta.value+"&descuento="+frmcerrar.odescuento.value+"&descuento_especial="+frmcerrar.odescuentoespecial.value+"&descuento_puntos="+frmcerrar.odescuentopuntos.value+""; 
+              location.href = "../intranet/funciones/procesapedido2.php?btnpagarpedido&ototalmenosdescu="+frmcerrar.ototalmenosdescu.value+"&propina="+frmcerrar.propina.value+"&omov="+id+"&omesa="+frmcerrar.omesa.value+"&monto_pagado="+frmcerrar.monto_pagado.value+"&fpago="+frmcerrar.fpago.value+"&nomcli="+frmcerrar.nomcli.value+"&descuento="+frmcerrar.odescuento.value+"&descuento_especial="+frmcerrar.odescuentoespecial.value+"&descuento_puntos="+frmcerrar.odescuentopuntos.value+"&escanje="+frmcerrar.escanje.value+""; 
             }
             else{
               
@@ -761,7 +792,7 @@ $(document).ready(function(){
         },
         callback: function (result) {
             if(result){
-              location.href = "../intranet/funciones/procesamoderador2.php?oidpagotemporal="+form_temporal.oidpagotemporal.value+"&ototal="+form_temporal.ototal.value+"&omesa_id="+form_temporal.omesa_id.value+"&ototaltemporal="+form_temporal.ototaltemporal.value+"&propina_temporal="+form_temporal.propina_temporal.value+"&fpago_temporal="+form_temporal.fpago_temporal.value+"&nomcli_temporal="+form_temporal.nomcli_temporal.value+"&monto_pago_temporal="+form_temporal.monto_pago_temporal.value+"&vuelto_temporal="+form_temporal.vuelto_temporal.value+"&boleta_temporal="+form_temporal.boleta_temporal.value+""; 
+              location.href = "../intranet/funciones/procesamoderador2.php?oidpagotemporal="+form_temporal.oidpagotemporal.value+"&ototal="+form_temporal.ototal.value+"&omesa_id="+form_temporal.omesa_id.value+"&ototaltemporal="+form_temporal.ototaltemporal.value+"&propina_temporal="+form_temporal.propina_temporal.value+"&fpago_temporal="+form_temporal.fpago_temporal.value+"&nomcli_temporal="+form_temporal.nomcli_temporal.value+"&monto_pago_temporal="+form_temporal.monto_pago_temporal.value+"&vuelto_temporal="+form_temporal.vuelto_temporal.value+""; 
             }
             else{
               

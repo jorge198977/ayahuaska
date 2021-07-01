@@ -102,7 +102,6 @@
                           <tr>
                             <th scope="col">RUT</th>
                             <th scope="col">NOMBRE</th>
-                            <th scope="col">CORREO</th>
                             <th scope="col">COMPRADO ($)</th>
                             <th scope="col">PESOS REALES</th>
                             <th scope="col">VER </th>
@@ -117,7 +116,6 @@
                             <tr>
                               <td><?php echo $socio['rut'] ?></td>
                               <td><?php echo $socio['nombre'] ?></td>
-                              <td><?php echo $socio['correo'] ?></td>
                               <td><?php echo number_format($socio_detalle['total'], 0, ',', '.');
                                 $montototal = $montototal + $socio_detalle['total'];
                                 $pesosreales = ceil((($socio_detalle['total']*1)/100));
@@ -201,10 +199,10 @@
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
       title:{
-        text: "VENTAS SOCIOS"
+        text: "VENTAS CLIENTES"
       },
       axisY: {
-        title: "VENTAS SOCIOS",
+        title: "VENTAS CLIENTES",
         
       },
       data: [{

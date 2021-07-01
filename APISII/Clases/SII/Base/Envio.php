@@ -40,7 +40,9 @@ abstract class Envio extends Documento
      * @version 2019-12-10
      */
     public function enviar($retry = null, $gzip = false)
-    {
+    {   
+
+
         // generar XML que se enviará
         if (!$this->xml_data) {
             $this->xml_data = $this->generar();
@@ -55,23 +57,28 @@ abstract class Envio extends Documento
             );
             return false;
         }
+
         // validar schema del documento antes de enviar
         if (!$this->schemaValidate()) {
             return false;
         }
+
         // si no se debe enviar no continuar
         if ($retry === 0) {
             return false;
         }
         // solicitar token
         $token = Autenticacion::getToken($this->Firma);
+
         if (!$token) {
             return false;
         }
+
         // enviar DTE
         $envia = $this->caratula['RutEnvia'];
         $emisor = !empty($this->caratula['RutEmisor']) ? $this->caratula['RutEmisor'] : $this->caratula['RutEmisorLibro'];
         $result = Sii::enviar($envia, $emisor, $this->xml_data, $token, $gzip, $retry);
+
         if ($result===false) {
             return false;
         }
@@ -79,6 +86,7 @@ abstract class Envio extends Documento
         if (!is_numeric((string)$result->TRACKID)) {
             return false;
         }
+
         return (int)(string)$result->TRACKID;
     }
 

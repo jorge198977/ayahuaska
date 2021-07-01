@@ -62,7 +62,7 @@
             if(isset($_POST['btnagregafolio'])){
               //$ambiente = "certificación";
               $ambiente = "producción";
-              $carpetaDestino = "xml/empresas/TURQUESA";
+              $carpetaDestino = "xml/empresas/AYAHUASKA";
               if(file_exists($carpetaDestino) || @mkdir($carpetaDestino)){
                 $archivo = basename($_FILES['folio']['name']); 
                 $extension = pathinfo($archivo, PATHINFO_EXTENSION);

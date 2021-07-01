@@ -139,7 +139,7 @@
                       </div>
                       <div class="col-sm">
                         <span>
-                          <label>Descuento Puntos Turquesa</label><input class="form-control input-lg" name="deses" id="deses" type="text" 
+                          <label>Descuento Puntos Ayahuaska</label><input class="form-control input-lg" name="deses" id="deses" type="text" 
                          disabled="true" value="<?php echo number_format($descuento_puntos, 0, ',', '.') ?>" >
                         </span>
                       </div>

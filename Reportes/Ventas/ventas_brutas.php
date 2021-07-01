@@ -76,15 +76,17 @@
                       <table  class="table table-flush">
                         <thead class="thead-light">
                           <tr>
-                            <th scope="col">VER</th>
+                            <!-- <th scope="col">VER</th> -->
                             <th scope="col">FECHA</th>
                             <th scope="col">MESA</th>
                             <th scope="col">N° INT</th>
                             <th scope="col">CLIENTE</th>
                             <th scope="col">ATENDIDO POR</th>
-                            <th scope="col">BOLETA</th>
                             <th scope="col">EFECTIVO</th>
                             <th scope="col">DEBITO</th>
+                            <th scope="col">TRANSFER</th>
+                            <th scope="col">FACTURA</th>
+                            <th scope="col">CHEQUE</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -107,13 +109,13 @@
                               }
                            ?>   
                             <tr class="info">
-                              <td>
+                              <!-- <td>
                                 <a href="../../boletas/movimientos/<?php echo $cierre['venta_id']."-".$cierre['venta_pago_id'] ?>.pdf" target="_blank">
                                   <button type="button" class="btn btn-default" aria-label="Left Align">
                                   <span class="far fa-eye" aria-hidden="true"></span>
                                   </button>
                                 </a>
-                              </td>
+                              </td> -->
                               <td><?php echo $cierre['fecha_full'] ?></td>
                               <td><?php 
                                 if($cierre['mesa_id'] == '8888'){
@@ -137,11 +139,7 @@
                                     $total = $total + $cierre['valor'];
                                   ?>
                               
-                              <td>
-                                <?php
-                                  echo $cierre['boleta'];
-                                ?>
-                              </td>
+
                               
                               <td>
                                 <?php 
@@ -181,13 +179,70 @@
                                     echo "0";
                                   }
                                 ?>
-                              </td>                  
+                              </td> 
+                              <td>
+                                <?php 
+                                  //TRANSFERENCIA
+                                  if($cierre['forma_pago_id'] == 8){
+                                    if($obtener_propina['monto'] != ""){
+                                      echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
+                                      $trasnferencia = $trasnferencia + $cierre['valor'] - $obtener_propina['monto'];
+                                      $prop_transferencia = $prop_transferencia + $obtener_propina['monto'];
+                                    }
+                                    else{
+                                      echo number_format($cierre['valor'], 0, ',', '.'); 
+                                      $trasnferencia = $trasnferencia + $cierre['valor'];
+                                    }
+                                  }
+                                  else{
+                                    echo "0";
+                                  }
+                                ?>
+                              </td>
+                              <td>
+                                <?php 
+                                  //FACTURA
+                                  if($cierre['forma_pago_id'] == 7){
+                                    if($obtener_propina['monto'] != ""){
+                                      echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
+                                      $factura = $factura + $cierre['valor'] - $obtener_propina['monto'];
+                                      $prop_factura = $prop_factura + $obtener_propina['monto'];
+                                    }
+                                    else{
+                                      echo number_format($cierre['valor'], 0, ',', '.'); 
+                                      $factura = $factura + $cierre['valor'];
+                                    }
+                                  }
+                                  else{
+                                    echo "0";
+                                  }
+                                ?>
+                              </td>
+                              <td>
+                                <?php 
+                                  //CHEQUE
+                                  if($cierre['forma_pago_id'] == 6){
+                                    if($obtener_propina['monto'] != ""){
+                                      echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
+                                      $cheque = $cheque + $cierre['valor'] - $obtener_propina['monto'];
+                                      $prop_cheque = $prop_cheque + $obtener_propina['monto'];
+                                    }
+                                    else{
+                                      echo number_format($cierre['valor'], 0, ',', '.'); 
+                                      $cheque = $cheque + $cierre['valor'];
+                                    }
+                                  }
+                                  else{
+                                    echo "0";
+                                  }
+                                ?>
+                              </td>                 
                             </tr>                 
                           <?php
                             }
                           ?>
                           <tr>           
-                            <td colspan=6> <?php echo "<strong>Turno ".$turno."</strong>"; ?></td> 
+                            <td colspan=4> <?php echo "<strong>Turno ".$turno."</strong>"; ?></td> 
                             <td></td>
                             <td>
                               <?php
@@ -208,7 +263,37 @@
                                 echo number_format($tarjeta, 0, ',', '.');
                               }
                               ?>
-                            </td>       
+                            </td>
+                            <td>
+                              <?php
+                              if($trasnferencia == 0){
+                                echo 0;
+                              }
+                              else{
+                                echo number_format($trasnferencia, 0, ',', '.');
+                              }
+                              ?>
+                            </td>   
+                            <td>
+                              <?php
+                              if($factura == 0){
+                                echo 0;
+                              }
+                              else{
+                                echo number_format($factura, 0, ',', '.');
+                              }
+                              ?>
+                            </td>  
+                            <td>
+                              <?php
+                              if($cheque == 0){
+                                echo 0;
+                              }
+                              else{
+                                echo number_format($cheque, 0, ',', '.');
+                              }
+                              ?>
+                            </td>        
                           </tr>
                         </tbody>
                       </table>
@@ -232,7 +317,7 @@
                                    <h4><strong>TOTAL VENTAS</strong></h4>
                                 </td>
                                 <td class="info" colspan=4>
-                                 <strong>$<?php echo number_format($efec + $tarjeta , 0, ',', '.') ?></strong>
+                                 <strong>$<?php echo number_format($efec + $tarjeta + $trasnferencia + $factura + $cheque , 0, ',', '.') ?></strong>
                                 </td>
                             </tr>
                             <tr>
@@ -251,8 +336,30 @@
                                   <strong>$<?php echo number_format($tarjeta, 0, ',', '.') ?></strong>
                                 </td>
                             </tr>
-                           
-
+                           <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Ventas Transferencia</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($trasnferencia, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Ventas Factura</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($factura, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Ventas Cheque</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($cheque, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
                            
                       
                     </thead>

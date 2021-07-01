@@ -22,10 +22,10 @@ if($socio_id != ""){
 $mesa_id = get_venta_mesa_id($_GET['mov']);
 $mesa = get_mesa_num_by_id($mesa_id);
 
-$impresora = "BARRA";
+$impresora = "BARRA1";
 solicita_ticket($_GET['mov'], $_GET['npedido'], $nombresocio, $usuario_id, $mesa, $impresora);
 solicita_ticker_cocina($_GET['mov'], $_GET['npedido'], $nombresocio, $usuario_id, $mesa);
-solicita_ticker_parrilla($_GET['mov'], $_GET['npedido'], $nombresocio, $usuario_id, $mesa);
+//solicita_ticker_parrilla($_GET['mov'], $_GET['npedido'], $nombresocio, $usuario_id, $mesa);
 
 $cant_happy = get_cant_happy($_GET['mov'], 0);
 if($cant_happy > 0){

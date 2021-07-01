@@ -69,7 +69,7 @@ Mesa: <?php echo get_mesa_by_id($venta['mesa_id']); ?>
             <td>
               <?php
                 $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
-                if($descuento_familia['descuento'] != ""){
+                if($descuento_familia != 0){
                   $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
                   if($dentro_horario == 1){
                     $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];

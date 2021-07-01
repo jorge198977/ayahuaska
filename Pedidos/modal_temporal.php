@@ -227,20 +227,7 @@ Mesa TEMPORAL
         </select>
 	</div>
 
-  <?php
-    $max_boleta = get_boleta_actual();
-    if($max_boleta == ""){
-      $max_boleta = 1;
-    }
-    else{
-      $max_boleta = $max_boleta + 1;
-    }
-  ?>
 
-  <label for="observacion" class="col-sm-xs-2 control-label">BOLETA</label>
-  <div class="col-sm-xs-10">
-    <input type="number" name="boleta_temporal" id="boleta_temporal" value="<?php echo ($max_boleta) ?>" class='form-control' required>
-  </div>
 
   <?php $propina = (($total-$descu-$sumatoria_descuento-$descuento_puntos) * 0.1); ?>
 	

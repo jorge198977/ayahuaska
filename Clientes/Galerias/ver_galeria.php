@@ -50,7 +50,7 @@
                               </a>
                               <div class="caption">
                                   <h3><?php echo $fot['fecha'] ?></h3>
-                                  <div class="fb-share-button" data-href="https://turquesa.realdev.cl/Clientes/Galerias/imagenes/<?php echo $fot['nombre'] ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://turquesa.realdev.cl/Clientes/Galerias/imagenes/<?php echo $fot['nombre'] ?>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
+                                  <div class="fb-share-button" data-href="https://ayahuska.realdev.cl/Clientes/Galerias/imagenes/<?php echo $fot['nombre'] ?>" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://ayahuska.realdev.cl/Clientes/Galerias/imagenes/<?php echo $fot['nombre'] ?>&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Compartir</a></div>
                               </div>
 
                           </div>

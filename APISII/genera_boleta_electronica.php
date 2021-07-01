@@ -15,7 +15,7 @@ require_once 'Clases/SII/Dte.php';
 require_once 'Clases/SII/Dte/PDF/DtePdf.php';
 require_once 'Clases/SII/EnvioDte.php';
 
-function create_boleta_electronica($detalles, $movi, $propina, $descuento){
+function create_boleta_electronica($detalles, $movi, $propina, $descuento, $esdelivery){
 	
 
 
@@ -38,6 +38,7 @@ function create_boleta_electronica($detalles, $movi, $propina, $descuento){
 	$emisor = set_emisor($datos['emisor']);
 	$total = 0;
 
+
 	foreach ($detalles as $key => $detalle) {
 		if($detalle['familia'] != 30){
 			$cantidad = $detalle['cantidad'];
@@ -47,6 +48,7 @@ function create_boleta_electronica($detalles, $movi, $propina, $descuento){
 		else{
 			
 			$det[] = array('IndExe' => 1, 'NmbItem' => $detalle['nombre'], 'QtyItem' => $cantidad, 'PrcItem' => $detalle['precio']);
+	
 
 		}
 		
@@ -55,7 +57,14 @@ function create_boleta_electronica($detalles, $movi, $propina, $descuento){
 	if($propina > 0){
 		
 		$det[] = array('IndExe' => 1, 'NmbItem' => 'PROPINA', 'QtyItem' => 1, 'PrcItem' => $propina);
+		
 
+	}
+
+	if($esdelivery == 1){
+		
+		$det[] = array('IndExe' => 1, 'NmbItem' => 'CARGO POR DELIVERY', 'QtyItem' => 1, 'PrcItem' => 2000);
+		
 	}
 
 
@@ -121,7 +130,7 @@ function create_boleta_electronica($detalles, $movi, $propina, $descuento){
 
 	$Firma = new FirmaElectronica($config['firma']);
 	foreach ($folios as $tipo => $cantidad)
-	    $Folios[$tipo] = new Folios(file_get_contents('../../APISII/xml/empresas/TURQUESA/'.$xml));
+	    $Folios[$tipo] = new Folios(file_get_contents('../../APISII/xml/empresas/AYAHUASKA/'.$xml));
 	$EnvioDTE = new EnvioDte();
 
 	// generar cada DTE, timbrar, firmar y agregar al sobre de EnvioDTE
@@ -137,11 +146,11 @@ function create_boleta_electronica($detalles, $movi, $propina, $descuento){
 
 	$EnvioDTE->setCaratula($caratula);
 	$EnvioDTE->setFirma($Firma);
-	$dir = "../../APISII/xml/boletas/TURQUESA/$fecha_hoy/";
+	$dir = "../../APISII/xml/boletas/AYAHUASKA/$fecha_hoy/";
 	if (!file_exists($dir)) {
 	    mkdir($dir, 0777, true);
 	}
-	$boleta_ubic = "../../APISII/xml/boletas/TURQUESA/$fecha_hoy/".$folio."_boleta.xml";
+	$boleta_ubic = "../../APISII/xml/boletas/AYAHUASKA/$fecha_hoy/".$folio."_boleta.xml";
 	file_put_contents($boleta_ubic, $EnvioDTE->generar()); // guardar XML en sistema de archivos
 
 	$xml = file_get_contents($boleta_ubic);
@@ -150,7 +159,7 @@ function create_boleta_electronica($detalles, $movi, $propina, $descuento){
 	//inserta_folio($folio, $total, date("Y-m-d"), date("H:i:s"), $rute, $respuesta['trackid'], $respuesta['estado'], $movi))
 
 	inserta_folio($folio, $total, date("Y-m-d"), date("H:i:s"), $rute, 0, 'PENDIENTE', $movi);
-	//crea_pdf($xml, $folio, $empresa);
+	crea_pdf($xml, $folio, $empresa);
 		//return $respuesta;	
 	return $folio;
 	

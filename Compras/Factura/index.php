@@ -125,19 +125,19 @@ function mostrar_oculto_cheque(){
         <div id="print-area">
 	        <div class="row pad-top font-big">
 		        <div class="col-lg-4 col-md-4 col-sm-4">
-		         <img src="../../intranet/images/turquesa.jpg" width="300" heigth="300" />
+		         <img src="../../assets/img/brand/logo.jpg" width="300" heigth="300" />
 		        </div>
 		        <div class="col-lg-4 col-md-4 col-sm-4">
-		            <strong>E-mail : </strong> turquesa.ovalle@gmail.com
+		            <strong>E-mail : </strong> ayahuaskaovalle@gmail.com
 		            <br />
-		            <strong>Teléfono :</strong> +56971035997 <br />
-					<strong>Sitio web :</strong> <?php echo $perfil[0]['sitio'];?> 
+		            <strong>Teléfono :</strong> 532622186 <br />
+					<strong>Sitio web :</strong> AYAHUSKA 
 		           
 		        </div>
 		        <div class="col-lg-4 col-md-4 col-sm-4">
-		            <strong><?php echo $perfil[0]['nombre'];?>  </strong>
+		            <strong>AYAHUSKA  </strong>
 		            <br />
-		            Dirección : Parcela camino a sotaqui km 5 
+		            Dirección : David perry 45
 		        </div>
 		    </div>
           
@@ -442,6 +442,7 @@ function mostrar_oculto_cheque(){
 	
 	$( "#guardar_item" ).submit(function( event ) {
 		parametros = $(this).serialize();
+		//alert(parametros);
 		$.ajax({
 			type: "POST",
 			url:'ajax/items.php',

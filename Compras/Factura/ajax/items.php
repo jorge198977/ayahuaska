@@ -16,7 +16,7 @@ if($action == 'ajax'){
 	if (isset($_POST['nombreProducto'])){
 		
 		$descripcion= $_POST['nombreProducto'];
-		$cantidad=intval($_POST['cantidad']);
+		$cantidad=$_POST['cantidad'];
 		$precio=intval($_POST['precio']);
 		$compra_id = $_POST['ofactura'];
 
@@ -31,16 +31,19 @@ if($action == 'ajax'){
 		if($tote > 0){
 			$date = mysql_fetch_array($rese);
 			
-			$nueva_cantidad = ($cantidad * $cc) + $date['cantidad'];
+			$nueva_cantidad = floatval(($cantidad * $cc) + $date['cantidad']);
 			//$nueva_cantidad = ($cantidad) + $date['cantidad'];
 			$sql="update ayahuaska.tmp set cantidad = ".$nueva_cantidad." where compra_id = ".$compra_id." and producto_id = ".$descripcion."";
 			mysql_query($sql);			
 		}
 		else{
-			$can = $cantidad * $cc;
+			$can = doubleval($cantidad*$cc);
 			//$can = $cantidad;
 			$sql="insert INTO  ayahuaska.tmp (producto_id, cantidad, precio, compra_id, formato_id) VALUES (".$descripcion.", ".$can.", ".$precio.", ".$compra_id.", ".$_POST['formato'].");";
 			mysql_query($sql);
+
+			$sql2="insert INTO  ayahuaska.tmp2 (texto) VALUES ('".$can."');";
+			mysql_query($sql2);
 		}
 
 	}

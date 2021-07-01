@@ -63,6 +63,8 @@
                           <tr>
                             <th scope="col">ID</th>
                             <th scope="col">NOMBRE</th>
+                            <th scope="col">POSICION</th>
+                            <th scope="col">ESTADO</th>
                             <th scope="col">ACCION</th>
                           </tr>
                         </thead>
@@ -73,6 +75,17 @@
                           <tr>
                             <th><?php echo $categoria['id'] ?></th>
                             <th><?php echo $categoria['nombre'] ?></th>
+                            <th><?php echo $categoria['posicion'] ?></th>
+                            <th>
+                              <?php
+                                if($categoria['estado'] == 0){
+                                  echo "ACTIVO";
+                                }
+                                else{
+                                  echo "INACTIVO";
+                                }
+                              ?>
+                            </th>
                             <th>
                                 <a onclick="return (confirmDel(<?php echo $categoria['id'] ?>));">
                                   <button type="button" name="btnelimbeb" value="btnelimbeb" class="btn btn-default"  aria-label="Left Align">

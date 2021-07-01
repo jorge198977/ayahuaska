@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ConsumoFolios xmlns="http://www.sii.cl/SiiDte" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sii.cl/SiiDte ConsumoFolio_v10.xsd" version="1.0">
+  <DocumentoConsumoFolios ID="REPORTE_CONSUMO_FOLIO_768251940_20210525_1623762986">
+    <Caratula version="1.0">
+      <RutEmisor>76825194-0</RutEmisor>
+      <RutEnvia>23374236-8</RutEnvia>
+      <FchResol>2021-03-22</FchResol>
+      <NroResol>99</NroResol>
+      <FchInicio>2021-05-25</FchInicio>
+      <FchFinal>2021-05-25</FchFinal>
+      <SecEnvio>1</SecEnvio>
+      <TmstFirmaEnv>2021-06-15T09:16:26</TmstFirmaEnv>
+    </Caratula>
+    <Resumen>
+      <TipoDocumento>39</TipoDocumento>
+      <MntNeto>707646</MntNeto>
+      <MntIva>134454</MntIva>
+      <TasaIVA>19</TasaIVA>
+      <MntTotal>842100</MntTotal>
+      <FoliosEmitidos>23</FoliosEmitidos>
+      <FoliosAnulados>0</FoliosAnulados>
+      <FoliosUtilizados>23</FoliosUtilizados>
+      <RangoUtilizados>
+        <Inicial>827</Inicial>
+        <Final>849</Final>
+      </RangoUtilizados>
+    </Resumen>
+    <Resumen>
+      <TipoDocumento>61</TipoDocumento>
+      <MntTotal>0</MntTotal>
+      <FoliosEmitidos>0</FoliosEmitidos>
+      <FoliosAnulados>0</FoliosAnulados>
+      <FoliosUtilizados>0</FoliosUtilizados>
+    </Resumen>
+  </DocumentoConsumoFolios>
+<Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo xmlns="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#REPORTE_CONSUMO_FOLIO_768251940_20210525_1623762986"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>Eas7sCVQRX4bugHgVNVs38FxMHE=</DigestValue></Reference></SignedInfo><SignatureValue>Z6IL26mmY/E74oVgugLEGoQLDS7uCYGb0TWJ1NddyNGckHYMBqpW4BXk/S9NdstK
+VUg1w1WrotHqZufZ5P8C+sykCloIUnTjuFNw40aet52pxHq3Qexz7Qf4T7c+9nzP
+KZTU6DtZF+1p/dZv7oc6lTOJPx0T1OurVYCgY6FmAQk=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>uZFc4NWVDdxYbg2Q7cqFcTSZMMT+hbfZPMaG92JPB5sb4AtQpXFbk+wSltW16J7Q
+GKnW2cr4q/PYot59EIcU5YGI0IrT6I4CQg2p1vuIvXoah8Gi6XAhi5SEDo69GK0r
+uJ1Du4ecHDEfkeN9q/zcZQPHrXmV6mfU7T5Iz3tCbfk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIGOzCCBSOgAwIBAgIKRfBJkgAAABVu0zANBgkqhkiG9w0BAQUFADCB0jELMAkG
+A1UEBhMCQ0wxHTAbBgNVBAgTFFJlZ2lvbiBNZXRyb3BvbGl0YW5hMREwDwYDVQQH
+EwhTYW50aWFnbzEUMBIGA1UEChMLRS1DRVJUQ0hJTEUxIDAeBgNVBAsTF0F1dG9y
+aWRhZCBDZXJ0aWZpY2Fkb3JhMTAwLgYDVQQDEydFLUNFUlRDSElMRSBDQSBGSVJN
+QSBFTEVDVFJPTklDQSBTSU1QTEUxJzAlBgkqhkiG9w0BCQEWGHNjbGllbnRlc0Bl
+LWNlcnRjaGlsZS5jbDAeFw0yMTA2MTUxMjI5MzRaFw0yNDA2MTQxMjI5MzRaMIG8
+MQswCQYDVQQGEwJDTDERMA8GA1UECBMIQ09RVUlNQk8xEDAOBgNVBAcMB0xJTUFS
+w40xLDAqBgNVBAoTI1NPQ0lFREFEIEdBU1RST05PTUlDQSBBWUFIVUFTS0EgU1BB
+MQowCAYDVQQLDAEqMSYwJAYDVQQDEx1FREdBUiBZRVJBUkQgRVNQSU5PWkEgR0VM
+RFJFUzEmMCQGCSqGSIb3DQEJARYXQ09OVEFCSUxJREFEQEFTRURSQUwuQ0wwgZ8w
+DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALmRXODVlQ3cWG4NkO3KhXE0mTDE/oW3
+2TzGhvdiTwebG+ALUKVxW5PsEpbVteie0Bip1tnK+Kvz2KLefRCHFOWBiNCK0+iO
+AkINqdb7iL16GofBoulwIYuUhA6OvRitK7idQ7uHnBwxH5Hjfav83GUDx615lepn
+1O0+SM97Qm35AgMBAAGjggKpMIICpTCCAU8GA1UdIASCAUYwggFCMIIBPgYIKwYB
+BAHDUgUwggEwMC0GCCsGAQUFBwIBFiFodHRwOi8vd3d3LmUtY2VydGNoaWxlLmNs
+L0NQUy5odG0wgf4GCCsGAQUFBwICMIHxHoHuAEUAbAAgAHIAZQBzAHAAbwBuAGQA
+ZQByACAAZQBzAHQAZQAgAGYAbwByAG0AdQBsAGEAcgBpAG8AIABlAHMAIAB1AG4A
+IAByAGUAcQB1AGkAcwBpAHQAbwAgAGkAbgBkAGkAcwBwAGUAbgBzAGEAYgBsAGUA
+IABwAGEAcgBhACAAZABhAHIAIABpAG4AaQBjAGkAbwAgAGEAbAAgAHAAcgBvAGMA
+ZQBzAG8AIABkAGUAIABjAGUAcgB0AGkAZgBpAGMAYQBjAGkA8wBuAC4AIABQAG8A
+cwB0AGUAcgBpAG8AcgBtAGUAbgB0AGUALDAdBgNVHQ4EFgQUPtxq5gzfLIPFTbAJ
+Xm+NL4R8788wCwYDVR0PBAQDAgTwMCMGA1UdEQQcMBqgGAYIKwYBBAHBAQGgDBYK
+MjMzNzQyMzYtODAfBgNVHSMEGDAWgBR44T6f0hKzejyNzTAOU7NDKQezVTA+BgNV
+HR8ENzA1MDOgMaAvhi1odHRwOi8vY3JsLmUtY2VydGNoaWxlLmNsL2VjZXJ0Y2hp
+bGVjYUZFUy5jcmwwOgYIKwYBBQUHAQEELjAsMCoGCCsGAQUFBzABhh5odHRwOi8v
+b2NzcC5lY2VydGNoaWxlLmNsL29jc3AwPQYJKwYBBAGCNxUHBDAwLgYmKwYBBAGC
+NxUIgtyDL4WTjGaF1Z0XguLcJ4Hv7DxhgcueFIaoglgCAWQCAQQwIwYDVR0SBBww
+GqAYBggrBgEEAcEBAqAMFgo5NjkyODE4MC01MA0GCSqGSIb3DQEBBQUAA4IBAQCi
+9Kd8nmsbHg03dx1MeKKLvc+KgqCpJMF7jyXpBwzdVmHfx2nC2BOycFKG8y2G1ETv
+6M2Ill1bZAXG562Jlh8biqynxb3Kg1pbDKwCi//sTUMg0vYx5mwTUKXaMBZJQ4yR
+toq44RIUxa426JTnvFkgDe3jqZniN/8zia/IV0ktbHaImEXdQ/7lubw/jgzF6mo0
+SqU3zDKewnA+8KY5WZzCy2FBtWSbkZjc4lEreaJT1UQa/oN7HPtUzKX5t9+gghr3
+pk10qKVmVowTeaj/0fOs74biiMduLprVtE3puoz5YdNuePGtEog+K2uxoQVhUcsO
+/c318Pr20m/cl9o96E73</X509Certificate></X509Data></KeyInfo></Signature></ConsumoFolios>

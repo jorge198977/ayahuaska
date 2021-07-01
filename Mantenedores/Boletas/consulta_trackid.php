@@ -54,7 +54,7 @@
                 <?php
                   if(isset($_POST['btnconsultatrackid'])){
                     //$folios = "";
-                    $estado = get_estado_by_trackid("76324007-K", $_POST['trackid']);
+                    $estado = get_estado_by_trackid("76825194-0", $_POST['trackid']);
                 ?>
 
 

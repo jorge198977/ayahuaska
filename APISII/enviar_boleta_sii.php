@@ -30,7 +30,7 @@ function get_pendientes_envio(){
 	$pendientes = get_pendientes_enviar($fecha_hoy);
 	if($pendientes != 0){
 		foreach ($pendientes as $key => $pendiete) {
-			$boleta_ubic = "xml/boletas/TURQUESA/$fecha_hoy/".$pendiete['folio']."_boleta.xml";
+			$boleta_ubic = "xml/boletas/AYAHUASKA/$fecha_hoy/".$pendiete['folio']."_boleta.xml";
 			$xml = file_get_contents($boleta_ubic);
 			$enviar_boleta = new Utility_EnvioBoleta();
 			$respuesta = $enviar_boleta::enviar($rutemisor, $rute, $xml, $Firma);

@@ -12,6 +12,10 @@
   $horaactual = date("H:i:s");
   $fechahoy = date("Y-m-d");
   $total = 0;
+
+
+
+
 ?>
 
 
@@ -57,7 +61,7 @@
     <?php
       $horaactual = date("H:i:s");
     $fechahoy = date("Y-m-d");
-    //$fechahoy = date("2019-07-04");
+    //$fechahoy = date("2021-05-18");
     $total = 0;
     ?>
     <!-- End Logo Section -->
@@ -205,12 +209,14 @@
                             <th scope="col">CLIENTE</th>
                             <th scope="col">ATENDIDO POR</th>
                             <th scope="col">TOTAL</th>
-                            <th scope="col">BOLETA</th>
+                          
                             <th scope="col">PROPINA</th>
                             <th scope="col">EFECTIVO</th>
                             <th scope="col">DEBITO</th>
                             <th scope="col">TRANSFER</th>
                             <th scope="col">FACTURA</th>
+                            <th scope="col">CHEQUE</th>
+                            <th scope="col">CANJE</th>
                             <!-- <th scope="col">CREDITO</th>
                             <th scope="col">ABONOS</th> -->
 
@@ -225,9 +231,16 @@
                             $prop_debito = 0;
                             $prop_transferencia = 0;
                             $prop_factura = 0;
+                            $prop_cheque = 0;
+                            $total = 0;
+                            $efec = 0;
+                            $tarjeta = 0;
+                            $trasnferencia = 0;
+                            $factura = 0;
+                            $cheque = 0;
                             foreach ($cierres as $key => $cierre) {
                               $obtener_propina = get_venta_propina($cierre['venta_id'], $cierre['venta_pago_id']);
-                              if($obtener_propina['monto'] != ""){
+                              if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
                                 $propina = $propina + $obtener_propina['monto'];
                               }
                               $vtas_detalles = get_ventas_detalles_id($cierre['venta_id']);
@@ -290,7 +303,7 @@
                                 ?>
                               </td>
                               <td><?php echo $cierre['venta_id'] ?></td>
-                              <td><?php $socio = get_nombre_socio(get_vta_socio_id($cierre['venta_id'])); echo $socio['nombre'] ?></td>
+                              <td><?php $socio = get_nombre_socio2(get_vta_socio_id($cierre['venta_id'])); echo $socio ?></td>
                               <td>
                                 <?php 
                                 $mesero = get_usuario_id($cierre['usuario_id']);
@@ -303,13 +316,9 @@
                                     $total = $total + $cierre['valor'];
                                   ?>
                               </td>
-                              <td>
-                                <?php
-                                  echo $cierre['boleta'];
-                                ?>
-                              </td>
+
                               <td><?php 
-                                    if($obtener_propina['monto'] != ""){
+                                    if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
                                       echo number_format($obtener_propina['monto'], 0, ',', '.'); 
                                     }
                                     else{
@@ -321,7 +330,7 @@
                                 <?php 
                                   //EFECTIVO
                                   if($cierre['forma_pago_id'] == 1){
-                                    if($obtener_propina['monto'] != ""){
+                                    if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
                                       echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
                                       $efec = $efec + $cierre['valor'] - $obtener_propina['monto'] ;
                                       $prop_efec = $prop_efec + $obtener_propina['monto'];
@@ -341,7 +350,7 @@
                                 <?php 
                                   //DEBITO
                                   if($cierre['forma_pago_id'] == 4){
-                                    if($obtener_propina['monto'] != ""){
+                                    if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
                                       echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
                                       $tarjeta = $tarjeta + $cierre['valor'] - $obtener_propina['monto'];
                                       $prop_debito = $prop_debito + $obtener_propina['monto'];
@@ -360,7 +369,7 @@
                                 <?php 
                                   //TRANSFERENCIA
                                   if($cierre['forma_pago_id'] == 8){
-                                    if($obtener_propina['monto'] != ""){
+                                    if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
                                       echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
                                       $trasnferencia = $trasnferencia + $cierre['valor'] - $obtener_propina['monto'];
                                       $prop_transferencia = $prop_transferencia + $obtener_propina['monto'];
@@ -379,7 +388,7 @@
                                 <?php 
                                   //FACTURA
                                   if($cierre['forma_pago_id'] == 7){
-                                    if($obtener_propina['monto'] != ""){
+                                    if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
                                       echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
                                       $factura = $factura + $cierre['valor'] - $obtener_propina['monto'];
                                       $prop_factura = $prop_factura + $obtener_propina['monto'];
@@ -394,6 +403,36 @@
                                   }
                                 ?>
                               </td>
+                              <td>
+                                <?php 
+                                  //CHEQUE
+                                  if($cierre['forma_pago_id'] == 6){
+                                    if((is_array($obtener_propina)) && ($obtener_propina['monto'] != "") ){
+                                      echo number_format($cierre['valor'] - $obtener_propina['monto'], 0, ',', '.'); 
+                                      $cheque = $cheque + $cierre['valor'] - $obtener_propina['monto'];
+                                      $prop_cheque = $prop_cheque + $obtener_propina['monto'];
+                                    }
+                                    else{
+                                      echo number_format($cierre['valor'], 0, ',', '.'); 
+                                      $cheque = $cheque + $cierre['valor'];
+                                    }
+                                  }
+                                  else{
+                                    echo "0";
+                                  }
+                                ?>
+                              </td>
+                              <td>
+                                <?php 
+                                  //CANJE
+                                  if($cierre['canje'] == 1){
+                                    echo "SI";
+                                  }
+                                  else{
+                                    echo "NO";
+                                  }
+                                ?>
+                              </td>
               
                             </tr>                 
                           <?php
@@ -402,10 +441,10 @@
                           <tr>           
                             <td colspan=6> <?php echo "<strong>Turno ".$turno."</strong>"; ?></td> 
                             <td><?php echo number_format($total, 0, ',', '.');?></td>  
-                            <td></td>
                             <td>
                               <?php
-                                $pro = $prop_efec + $prop_debito + $prop_transferencia + $prop_factura;
+                                $pro = $prop_efec + $prop_debito + $prop_transferencia + $prop_factura + $prop_cheque;
+                               // echo "EFE->".$prop_efec.", DEB->".$prop_debito.", trna->".$prop_transferencia.", fac->".$prop_factura.", che->".$prop_cheque."<br>";
                                 echo number_format($pro, 0, ',', '.');
                               ?>
                             </td>
@@ -448,7 +487,17 @@
                                 echo number_format($factura, 0, ',', '.');
                               }
                               ?>
-                            </td>    
+                            </td>  
+                            <td>
+                              <?php
+                              if($cheque == 0){
+                                echo 0;
+                              }
+                              else{
+                                echo number_format($cheque, 0, ',', '.');
+                              }
+                              ?>
+                            </td>   
                           </tr>
                         </tbody>
                       </table>
@@ -514,6 +563,14 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Total Ventas menos propina</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($total - $propina, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
+                            <tr>
                             <td class="success" colspan=4 align="center">
                               <strong>Ventas Efectivo</strong>
                             </td>
@@ -535,6 +592,14 @@
                                 </td>
                                 <td class="info" colspan=4>
                                   <strong>$<?php echo number_format($trasnferencia, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Ventas Cheque</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($cheque, 0, ',', '.') ?></strong>
                                 </td>
                             </tr>
                             <tr>
@@ -561,6 +626,23 @@
                                   <strong>$<?php echo number_format($prop_transferencia, 0, ',', '.') ?></strong>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Propina Cheque</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($prop_cheque, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="success" colspan=4 align="center">
+                                  <strong>Propina Factura</strong>
+                                </td>
+                                <td class="info" colspan=4>
+                                  <strong>$<?php echo number_format($prop_factura, 0, ',', '.') ?></strong>
+                                </td>
+                            </tr>
+
                        
                             <tr>
                                 <td class="success" colspan=4 align="center">
@@ -576,7 +658,7 @@
                                    <h4><strong>Real Efectivo</strong></h4>
                                 </td>
                                 <td class="info" colspan=4>
-                                 <strong>$<?php echo number_format($efec - $total_egreso  - $prop_debito, 0, ',', '.') ?></strong>
+                                 <strong>$<?php echo number_format($efec - $total_egreso  - $prop_transferencia - $prop_debito - $prop_cheque, 0, ',', '.') ?></strong>
                                 </td>
                             </tr>
 

@@ -41,7 +41,7 @@ if(isset($_GET['EliminaProducto'])){
 
 // INGRESO NUEVO PRODUCTO
 if(isset($_POST['Ingresaproductopreparado'])){
-	if(inserta_producto_preparado($_POST['nombreproducto'], $_POST['precio'], $_POST['oFamilia'], $_POST['es_happy'], $_POST['es_cocina'])){
+	if(inserta_producto_preparado($_POST['nombreproducto'], $_POST['precio'], $_POST['oFamilia'], $_POST['es_happy'], $_POST['es_cocina'], $_POST['categoria'], $_POST['estado'], $_POST['descripcion'])){
 		header("Location:../../Mantenedores/Productos/visualiza_producto_preparado.php?Familia=".$_POST['oFamilia']."&Ingresado");
 	}
 	else{
@@ -49,7 +49,7 @@ if(isset($_POST['Ingresaproductopreparado'])){
 	}
 }
 if(isset($_POST['Actproductopreparado'])){
-	if(actualiza_producto_preparado($_POST['nombreproducto'], $_POST['precio'], $_POST['Actproductopreparado'], $_POST['es_happy'], $_POST['es_cocina'], $_POST['oFamilia'], $_POST['categoria'])){
+	if(actualiza_producto_preparado($_POST['nombreproducto'], $_POST['precio'], $_POST['Actproductopreparado'], $_POST['es_happy'], $_POST['es_cocina'], $_POST['oFamilia'], $_POST['categoria'], $_POST['estado'], $_POST['descripcion'], $_POST['orden'])){
 		header("Location:../../Mantenedores/Productos/visualiza_producto_preparado.php?Familia=".$_POST['oFamilia']."&Actualizado");
 	}
 	else{
@@ -312,7 +312,7 @@ if(isset($_GET['Elimpie'])){
 }
 
 if(isset($_POST['ElimidMovPedido'])){
-	if(elimina_pedido($_POST['ElimidMovPedido'], $_POST['mesa_id'], $_POST['motivo'], $_SESSION['id'])){
+	if(elimina_pedido($_POST['ElimidMovPedido'], $_POST['mesa_id'], $_POST['motivo'], $_SESSION['id'], $_POST['merma'])){
 		header("Location:../../Mantenedores/Eliminar_pedidos/eliminar_pedido.php?Eliminado");
 	}
 	else{
@@ -709,12 +709,24 @@ if(isset($_POST['omovcambiaproduto'])){
 
 if(isset($_GET['oidpagotemporal'])){
 
-	if(ingresa_boleta_elec_temp($_GET['oidpagotemporal'], $_GET['ototal'], $_GET['omesa_id'], $_GET['ototaltemporal'], $_GET['propina_temporal'], $_GET['fpago_temporal'], $_GET['nomcli_temporal'], $_SESSION['id'], $_GET['monto_pago_temporal'], $_GET['vuelto_temporal'], $_GET['boleta_temporal'])){
-		actualiza_estado_temp_ventas_datalles($_GET['oidpagotemporal'], 1);
-		header("Location:../../Pedidos/cerrarped.php?Mov=".$_GET['oidpagotemporal']."&pedircuenta");
+	if(($_GET['fpago_temporal'] == 1) || ($_GET['fpago_temporal'] == 4) || ($_GET['fpago_temporal'] == 8) || ($_GET['fpago_temporal'] == 6)){
+		if(ingresa_boleta_elec_temp($_GET['oidpagotemporal'], $_GET['ototal'], $_GET['omesa_id'], $_GET['ototaltemporal'], $_GET['propina_temporal'], $_GET['fpago_temporal'], $_GET['nomcli_temporal'], $_SESSION['id'], $_GET['monto_pago_temporal'], $_GET['vuelto_temporal'], $_GET['boleta_temporal'])){
+			actualiza_estado_temp_ventas_datalles($_GET['oidpagotemporal'], 1);
+			header("Location:../../Pedidos/cerrarped.php?Mov=".$_GET['oidpagotemporal']."&pedircuenta");
+		}
+		else{
+			header("Location:../../Pedidos/cerrarped.php?Mov=".$_GET['oidpagotemporal']."&ProblemasAlPagar");	
+		}
 	}
 	else{
-		header("Location:../../Pedidos/cerrarped.php?Mov=".$_GET['oidpagotemporal']."&ProblemasAlPagar");	
+		//echo "dhdhhdhd";
+		if(ingresa_nueva_forma_pago($_GET['oidpagotemporal'], $_GET['ototal'], $_GET['omesa_id'], $_GET['ototaltemporal'], $_GET['propina_temporal'], $_GET['fpago_temporal'], $_GET['nomcli_temporal'], $_SESSION['id'], $_GET['monto_pago_temporal'], $_GET['vuelto_temporal'], $_GET['boleta_temporal'])){
+			actualiza_estado_temp_ventas_datalles($_GET['oidpagotemporal'], 1);
+			header("Location:../../Pedidos/cerrarped.php?Mov=".$_GET['oidpagotemporal']."&pedircuenta");
+		}
+		else{
+			header("Location:../../Pedidos/cerrarped.php?Mov=".$_GET['oidpagotemporal']."&ProblemasAlPagar");	
+		}
 	}
 }
 
@@ -826,7 +838,7 @@ if(isset($_GET['ElimidEgreso'])){
 
 
 if(isset($_POST['ingresacategoria'])){
-	if(ingresa_nueva_categoria($_POST['nombrecategoria'])){
+	if(ingresa_nueva_categoria($_POST['nombrecategoria'], $_POST['estado'], $_POST['posicion'])){
 		header("Location:../../Mantenedores/Categorias/index.php?Ingresado");
 	}
 	else{
@@ -842,12 +854,35 @@ if(isset($_GET['ElimidCategoria'])){
 	}
 }
 if(isset($_POST['ActidCategoria'])){
-	if(actualiza_categoria($_POST['nombrecategoria'], $_POST['ActidCategoria'])){
+	if(actualiza_categoria($_POST['nombrecategoria'], $_POST['estado'], $_POST['ActidCategoria'], $_POST['posicion'])){
 		header("Location:../../Mantenedores/Categorias/index.php?Actualizado");
 	}
 	else{
 		header("Location:../../Mantenedores/Categorias/index.php?ErrorActualizando");
 	}
 }
+
+
+
+
+
+
+
+
+if(isset($_GET['ElimidOpinion'])){
+	if(elimina_opinion_by_id($_GET['ElimidOpinion'])){
+		header("Location:../../Mantenedores/Opiniones/index.php?Eliminado");	
+	}
+	else{
+		header("Location:../../Mantenedores/Opiniones/index.php?ErrorEliminado");
+	}
+}
+
+
+
+
+
+
+
 
 ?>

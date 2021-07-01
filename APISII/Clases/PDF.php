@@ -131,7 +131,7 @@ class PDF extends TCPDF
             if ($footer===true) {
                 $footer = [
                     'left' => 'GRACIAS POR PREFERIRNOS',
-                    'right' => 'TURQUESA',
+                    'right' => 'AYAHUASKA',
                 ];
             }
             // si no es arreglo se convierte en uno

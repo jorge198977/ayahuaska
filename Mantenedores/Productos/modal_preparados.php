@@ -9,6 +9,9 @@ if($id != 0){
   $precio = $preparado['PREPARADOS_PRECIO'];
    $famprep = $preparado['PREPARADOS_FAMILIA'];
    $categoria_id = $preparado['categoria_id'];
+   $descrip = $preparado['descripcion'];
+   $orden = $preparado['orden'];
+
  
 }
 ?>
@@ -63,7 +66,7 @@ if($id != 0){
 
 <label for="observacion" class="col-sm-xs-2 control-label">CATEGORIA</label>
 <div class="col-sm-xs-10">
-  <select class="form-control input-lg" name="categoria" required>
+  <select class="form-control input-lg" name="categoria">
     <option value=""> Seleccione Categoria </option>
     <?php 
       $categorias = get_all_categorias();
@@ -77,6 +80,26 @@ if($id != 0){
       }
     ?>                                 
   </select>
+</div>
+
+<label for="observacion" class="col-sm-xs-2 control-label">ESTADO</label>
+<div class="col-sm-xs-10">
+  <select class="form-control input-lg" name="estado" required> 
+    <option value=""> Ingrese</option>
+    <option <?php if($preparado['estado'] == 1){ ?>  selected <?php } ?> value="1"> ACTIVO</option>
+    <option <?php if($preparado['estado'] == 0){ ?>  selected <?php } ?> value="0"> INACTIVO</option>
+  </select>  
+</div>
+
+
+<label for="observacion" class="col-sm-xs-2 control-label">ORDEN</label>
+<div class="col-sm-xs-10">
+  <input type="number" name="orden" value="<?php echo $orden ?>" class='form-control' >
+</div>
+
+<label for="observacion" class="col-sm-xs-2 control-label">DESCRIPCION</label>
+<div class="col-sm-xs-10">
+  <textarea class="form-control" id="descripcion" name="descripcion" rows="3"><?php echo $descrip ?></textarea>
 </div>
 
 

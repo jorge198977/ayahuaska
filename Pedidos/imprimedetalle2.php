@@ -15,7 +15,7 @@ class PDF extends FPDF{
 
 	function header(){
 		$this->SetFont('Helvetica','',12);
-		$this->Cell(60,4,'TURQUESA',0,1,'C');
+		$this->Cell(60,4,'AYAHUASKA',0,1,'C');
 		$this->Cell(60,4,'OVALLE',0,1,'C');
 	}
 

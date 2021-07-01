@@ -23,12 +23,12 @@ function genera_consumo_folio_by_empresa(){
     $empresa = $datos['datos']['empresa'];
     $rut = $datos['datos']['rut'];
     $fecha_hoy = date("Y-m-d");
-    //$fecha_hoy = '2021-01-04';
+    //$fecha_hoy = '2021-05-18';
     $fecha_rep = strtotime ( '-1 day' , strtotime ( $fecha_hoy ) ) ;
     $fecha_rep = date ( 'Y-m-d' , $fecha_rep );
 
 
-    $nombreDte = "xml/ConsumoFolios/TURQUESA/EnvioDTE-".$fecha_hoy.".xml";
+    $nombreDte = "xml/ConsumoFolios/AYAHUSKA/EnvioDTE-".$fecha_hoy.".xml";
 
 
 
@@ -44,7 +44,7 @@ function genera_consumo_folio_by_empresa(){
 
         foreach ($folios_emitidos as $key => $folio_emitido) {
             $total = intval($folio_emitido['monto']);
-            $neto = intval($folio_emitido['monto']/1.19);
+            $neto = round($folio_emitido['monto']/1.19, 0);
             $iva = $total - $neto;
 
             $ConsumoFolio->agregar([

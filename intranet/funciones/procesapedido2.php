@@ -34,16 +34,40 @@ if(isset($_GET['btnpagarpedido'])){
 	$descuentos = $_GET['descuento'] + $_GET['descuento_especial'] + $_GET['descuento_puntos'];
 	if($_GET['ototalmenosdescu'] > 0){
 
-		if(($_GET['fpago'] == 1) || ($_GET['fpago'] == 4) || ($_GET['fpago'] == 8)){
-			if(ingresa_boleta_elec($_GET['omov'], $totcpro, $_GET['omesa'], $_GET['ototalmenosdescu'], $_GET['monto_pagado'], $_GET['propina'], $_GET['fpago'], $_GET['nomcli'], $_SESSION['id'], $_GET['boleta'], $descuentos)){
-				actualiza_estado_venta_detalle($_GET['omov'], 1);
-				header("Location:../../Pedidos/ver_pedido.php?Pagado");	
+		if(($_GET['fpago'] == 1) || ($_GET['fpago'] == 4) || ($_GET['fpago'] == 8) || ($_GET['fpago'] == 6)){
+
+			if($_GET['escanje'] == 1){
+				
+				actualiza_venta_canje($_GET['omov'], 1);
+
+				if(ingresa_nueva_forma_pago2($_GET['omov'], $totcpro, $_GET['omesa'], $_GET['ototalmenosdescu'], $_GET['monto_pagado'], $_GET['propina'], $_GET['fpago'], $_GET['nomcli'], $_SESSION['id'], $_GET['boleta'])){
+					actualiza_estado_venta_detalle($_GET['omov'], 1);
+					header("Location:../../Pedidos/ver_pedido.php?Pagado");	
+				}
+				else{
+					header("Location:../../Pedidos/ver_pedido.php?ErrorPagando");
+				}
+
 			}
 			else{
-				header("Location:../../Pedidos/ver_pedido.php?ErrorPagando");
+
+				if(ingresa_boleta_elec($_GET['omov'], $totcpro, $_GET['omesa'], $_GET['ototalmenosdescu'], $_GET['monto_pagado'], $_GET['propina'], $_GET['fpago'], $_GET['nomcli'], $_SESSION['id'], $_GET['boleta'], $descuentos)){
+
+					actualiza_estado_venta_detalle($_GET['omov'], 1);
+					header("Location:../../Pedidos/ver_pedido.php?Pagado");	
+				}
+				else{
+					header("Location:../../Pedidos/ver_pedido.php?ErrorPagando");
+				}
+
 			}
 		}
 		else{
+
+			if($_GET['escanje'] == 1){
+				actualiza_venta_canje($_GET['omov'], 1);
+			}
+
 			if(ingresa_nueva_forma_pago2($_GET['omov'], $totcpro, $_GET['omesa'], $_GET['ototalmenosdescu'], $_GET['monto_pagado'], $_GET['propina'], $_GET['fpago'], $_GET['nomcli'], $_SESSION['id'], $_GET['boleta'])){
 				actualiza_estado_venta_detalle($_GET['omov'], 1);
 				header("Location:../../Pedidos/ver_pedido.php?Pagado");	

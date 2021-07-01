@@ -44,7 +44,7 @@ class Utility_EnvioBoleta
      */
     public static function enviar($usuario, $empresa, $xml, $Firma, $gzip = false, $retry = null)
     {
-        
+
         ///OBTENCION DEL TOKEN
         $token=self::getToken($Firma);
 
@@ -141,7 +141,7 @@ class Utility_EnvioBoleta
      * @version 2020-11-19
      */
     public static function getToken($Firma = [])
-    {   //var_dump("Entro en la función getToken");
+    {   var_dump("Entro en la función getToken");
         if (!$Firma) return false;
         $semilla = self::getSeed();
         if (!$semilla) return false;
@@ -192,7 +192,7 @@ class Utility_EnvioBoleta
     {   
 
         $fecha_hoy = date("Y-m-d");
-        echo $boleta_ubic = "/var/www/realdev.cl/turquesa/APISII/xml/boletas/TURQUESA/$fecha_hoy/temp";
+        echo $boleta_ubic = "/var/www/realdev.cl/ayahuaka/APISII/xml/boletas/AYAHUASKA/$fecha_hoy/temp";
 
         if (!file_exists($boleta_ubic)) {
             mkdir($boleta_ubic, 0777, true);
@@ -269,6 +269,7 @@ class Utility_EnvioBoleta
         // enviar XML al SII
         for ($i=0; $i<$retry; $i++) {
             $response = curl_exec($curl);
+
             if ($response and $response!='Error 500') {
                 break;
             }
@@ -277,6 +278,7 @@ class Utility_EnvioBoleta
 
         // verificar respuesta del envío y entregar error en caso que haya uno
         if (!$response or $response=='Error 500') {
+
             if (!$response) {
                 Log::write(Estado::ENVIO_ERROR_CURL, Estado::get(Estado::ENVIO_ERROR_CURL, curl_error($curl)));
             }
@@ -289,6 +291,7 @@ class Utility_EnvioBoleta
         curl_close($curl);
 
         $r=json_decode($response, true);
+        //print_r($r);
         return $r;
     }
 

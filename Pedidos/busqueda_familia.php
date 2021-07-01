@@ -29,7 +29,7 @@ $npedid = $_POST['npedid'];
 
 
 $fecha = date("H:i:s");
-$sqlhora = "select * from turquesa.horahappy where idhorahappy = 1";
+$sqlhora = "select * from ayahuaska.horahappy where idhorahappy = 1";
 $reshora = mysql_query($sqlhora);
 $dathora = mysql_fetch_array($reshora);
 $horario1 = $dathora['horainicialhappy'];
@@ -38,19 +38,19 @@ $ret = dentro_de_horario($horario1, $horario2, $fecha);
 if($ret == 1){
   if(isset($_POST['parametros'])){
     $dato = $_POST['parametros'];
-    $sql = "select * from turquesa.familias where nombre like '%".$dato."%' order by nombre asc";
+    $sql = "select * from ayahuaska.familias where nombre like '%".$dato."%' order by nombre asc";
   }
   else{
-    $sql = "select * from turquesa.familias order by nombre asc";  
+    $sql = "select * from ayahuaska.familias order by nombre asc";  
   }
 }
 else{
   if(isset($_POST['parametros'])){
     $dato = $_POST['parametros'];
-    $sql = "select * from turquesa.familias where nombre like '%".$dato."%' and nombre not like '%HAPPY%' order by nombre asc";
+    $sql = "select * from ayahuaska.familias where nombre like '%".$dato."%' and nombre not like '%HAPPY%' order by nombre asc";
   }
   else{
-    $sql = "select * from turquesa.familias where nombre not like '%HAPPY%' order by nombre asc";  
+    $sql = "select * from ayahuaska.familias where nombre not like '%HAPPY%' order by nombre asc";  
   }
 }
 

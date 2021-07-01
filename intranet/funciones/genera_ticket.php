@@ -1,7 +1,7 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
 
 // function postURL($url, $parametros)
 // {
@@ -37,19 +37,19 @@ function solicita_ticket($vta_id, $npedido, $nombre_cliente, $usuario_id, $mesa,
     }
   }
 
-  // if($cuenta_barra > 0){
-  //   $url = "https://api.notifier.realdev.cl/api/solicita_ticket";
-  //   $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'TURQUESA',
-  //       'impresora' => $impresora,
-  //       'movimiento' => $vta_id,
-  //       'mesa' => $mesa,
-  //       'mesero' => $nombre_usuario,
-  //       'nombrecli' => $nombre_cliente,
-  //       'detalle' => $detalle);
-  //   $data = postURL($url, $parametrosdatos);
-  //   $data = json_decode($data);
-  //   return $data;
-  // }
+  if($cuenta_barra > 0){
+    $url = "https://api.notifier.realdev.cl/api/solicita_ticket";
+    $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'AYAHUASKA',
+        'impresora' => $impresora,
+        'movimiento' => $vta_id,
+        'mesa' => $mesa,
+        'mesero' => $nombre_usuario,
+        'nombrecli' => $nombre_cliente,
+        'detalle' => $detalle);
+    $data = postURL($url, $parametrosdatos);
+    $data = json_decode($data);
+    return $data;
+  }
 
 }
 
@@ -73,19 +73,19 @@ function solicita_ticker_cocina($vta_id, $npedido, $nombre_cliente, $usuario_id,
     
   }
 
-  // if($cuenta_cocina > 0){
-  //   $url = "https://api.notifier.realdev.cl/api/solicita_ticket";
-  //   $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'TURQUESA',
-  //       'impresora' => 'COCINA',
-  //       'movimiento' => $vta_id,
-  //       'mesa' => $mesa,
-  //       'mesero' => $nombre_usuario,
-  //       'nombrecli' => $nombre_cliente,
-  //       'detalle' => $detalle);
-  //   $data = postURL($url, $parametrosdatos);
-  //   $data = json_decode($data);
-  //   return $data;
-  // }
+  if($cuenta_cocina > 0){
+    $url = "https://api.notifier.realdev.cl/api/solicita_ticket";
+    $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'AYAHUASKA',
+        'impresora' => 'COCINA',
+        'movimiento' => $vta_id,
+        'mesa' => $mesa,
+        'mesero' => $nombre_usuario,
+        'nombrecli' => $nombre_cliente,
+        'detalle' => $detalle);
+    $data = postURL($url, $parametrosdatos);
+    $data = json_decode($data);
+    return $data;
+  }
 
 }
 
@@ -108,7 +108,7 @@ function solicita_ticker_parrilla($vta_id, $npedido, $nombre_cliente, $usuario_i
 
   // if($cuenta_parrilla > 0){
   //   $url = "https://api.notifier.realdev.cl/api/solicita_ticket";
-  //   $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'TURQUESA',
+  //   $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'AYAHUASKA',
   //       'impresora' => 'PARRILLA',
   //       'movimiento' => $vta_id,
   //       'mesa' => $mesa,
@@ -138,22 +138,22 @@ function solicita_happy($movi, $usuario_id, $nombresocio, $mesa, $impresora){
       actualiza_estado_preparado_happy($movi, 1, $prep_happy['preparado_id']);
 
 
-      // for($z=0; $z < $prep_happy['cantidad']; $z++ ){
-      //   $detalle = null;
-      //   $codigo = "H".$prep_happy['preparado_id']."M".$movi."D".$prep_happy['venta_detalle_id'];
-      //   $detalle[] = array('nombre' => utf8_encode($preparado['PREPARADOS_NOMBRE']) , 'cantidad' => $prep_happy['cantidad'], 'codigo' =>$codigo);
-      //   $url = "https://api.notifier.realdev.cl/api/solicita_happy";
-      //   $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'TURQUESA',
-      //       'impresora' => $impresora,
-      //       'movimiento' => $movi,
-      //       'mesa' => $mesa,
-      //       'mesero' => $nombre_usuario,
-      //       'nombrecli' => $nombresocio,
-      //       'detalle' => $detalle);
-      //   $data = postURL($url, $parametrosdatos);
-      //   $data = json_decode($data);
+      for($z=0; $z < $prep_happy['cantidad']; $z++ ){
+        $detalle = null;
+        $codigo = "H".$prep_happy['preparado_id']."M".$movi."D".$prep_happy['venta_detalle_id'];
+        $detalle[] = array('nombre' => utf8_encode($preparado['PREPARADOS_NOMBRE']) , 'cantidad' => $prep_happy['cantidad'], 'codigo' =>$codigo);
+        $url = "https://api.notifier.realdev.cl/api/solicita_happy";
+        $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'AYAHUASKA',
+            'impresora' => $impresora,
+            'movimiento' => $movi,
+            'mesa' => $mesa,
+            'mesero' => $nombre_usuario,
+            'nombrecli' => $nombresocio,
+            'detalle' => $detalle);
+        $data = postURL($url, $parametrosdatos);
+        $data = json_decode($data);
 
-      // }
+      }
 
 
 

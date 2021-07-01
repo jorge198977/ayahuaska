@@ -35,6 +35,20 @@
        });
   }
 
+
+  function modal_opinion(id)
+  {
+    $('#myModalOpinion #id_promocion2').val(id);   $.ajax({
+           url: 'Clientes/modal_opinion.php',
+           type: 'POST',
+           data:{id:id},
+           success: function(data){
+                $('#contenidoOpinion').html(data);
+                $('#myModalOpinion').modal('show');
+           }
+       });
+  }
+
 </script>
 
 
@@ -100,15 +114,16 @@
             <div class="container-fluid d-flex align-items-center">
               <div class="row">
                 <div class="col-lg-12 col-md-12">
-                  <h2 class="display-2 text-white">Mesa: <?php echo $_GET['Mesa'] ?></h2>
-                  <h1 class="display-2 text-white">Hola <?php echo utf8_decode($nombre_socio) ?>, tus puntos son <?php echo $puntos ?></h1>
+                  <h2 class="display-2 text-white align-items-left">Mesa: <?php echo $_GET['Mesa'] ?></h2>
+                  <p class="display-2 text-white align-items-left">Bienvenido a AYAHUASKA <?php echo utf8_decode($nombre_socio) ?></p>
+                  <h5 class="display-4 text-white align-items-left"> Tus puntos son <?php echo $puntos ?></h5>
                 </div>
               </div>
             </div>
 
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
-                 <a href="Clientes/Carta/cartaturquesa.pdf" target="_blank"> 
+                 <a href="https://carta.ayahuaska.realdev.cl/" target="_blank"> 
                   <div class="card-body">
                     <div class="row">
                       <div class="col">
@@ -311,6 +326,40 @@
               </div>
             </div>
 
+
+
+
+
+            <div class="col-xl-3 col-lg-6">
+              <br>
+              <div class="card card-stats mb-4 mb-xl-0">
+                <a href="#" onclick='modal_opinion(1)'>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h2 class="card-title text-uppercase text-muted mb-0">OPINION</h2>
+                        <span class="h2 font-weight-bold mb-0"></span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-success text-white rounded-circle shadow">
+                           <i class="fas fa-book-open"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i></span>
+                      <span class="text-nowrap">Ayúdanos a mejorar</span>
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+
+        
+
+
+
           </div>
         </div>
       </div>
@@ -340,6 +389,35 @@
             </div>
             <div class="modal-footer">
               <button type="submit" onClick="return valida_envio()" class="btn btn-success">SUBIR</button>
+              <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+
+
+
+
+
+  <div id="myModalOpinion" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+       <br>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <form  name="miform" id="form1" method="post" action="intranet/funciones/procesa_galeria.php">
+          <div class="modal-header">
+            <h2 class="modal-title">COMPARTE TU OPINION</h2>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+                <div id="contenidoOpinion"></div>
+                <input type="hidden" name="omesa" id="omesa" value="<?php echo $_GET['Mesa'] ?>">
+            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" onClick="return valida_envio()" class="btn btn-success">Enviar</button>
               <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
             </div>
           </form>
@@ -400,6 +478,13 @@
   ?>
     <script type="text/javascript">
       bootbox.alert("Error subiendo imagen!");
+    </script>
+  <?php
+    }
+    if(isset($_GET['OpinionENviada'])){
+  ?>
+    <script type="text/javascript">
+      bootbox.alert("Gracias por ayudarnos a mejorar!");
     </script>
   <?php
     }

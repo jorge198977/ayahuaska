@@ -598,7 +598,7 @@ class Sii
      */
     public static function enviar($usuario, $empresa, $dte, $token, $gzip = false, $retry = null)
     {
-
+      
         // definir datos que se usarán en el envío
         list($rutSender, $dvSender) = explode('-', str_replace('.', '', $usuario));
         list($rutCompany, $dvCompany) = explode('-', str_replace('.', '', $empresa));
@@ -638,7 +638,7 @@ class Sii
             'Referer: https://libredte.cl',
             'Cookie: TOKEN='.$token,
         ];
-        echo $url = 'https://'.self::$config['servidor'][self::getAmbiente()].'.sii.cl/cgi_dte/UPL/DTEUpload';
+        $url = 'https://'.self::$config['servidor'][self::getAmbiente()].'.sii.cl/cgi_dte/UPL/DTEUpload';
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
@@ -662,6 +662,7 @@ class Sii
             }
         }
         unlink($file);
+      
         // verificar respuesta del envío y entregar error en caso que haya uno
         if (!$response or $response=='Error 500') {
             if (!$response) {

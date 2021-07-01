@@ -221,6 +221,7 @@ class Model_DteBoletaConsumo extends Model_Base_Envio
         if (!$this->track_id) {
             return false;
         }
+        
         $this->secuencia = $ConsumoFolio->getSecuencia();
         $this->xml = base64_encode($xml);
         $this->revision_estado = null;

@@ -1,4 +1,7 @@
-<?php session_start();   ?>
+<?php session_start();   
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -45,6 +48,7 @@
                             <th scope="col">NOMBRE</th>
                             <th scope="col">PRECIO</th>
                             <th scope="col">FAMILIA</th>
+                            <th scope="col">CATEGORIA</th>
                             <th scope="col">DESCUENTO PROD</th>
                             <?php if($_SESSION['tipo'] == 1){ ?>
                               <th scope="col">COSTO TOTAL</th>
@@ -56,6 +60,7 @@
                     
                           foreach ($preparados as $key => $preparado) {
                             $nombre_familia = get_familia($preparado['familia']);
+                            $categoria = get_categoria_nombre($preparado['categoria_id']);
                             if($nombre_familia != ""){
                             $producto_preparados = get_producto_preparados_id_prep($preparado['id']);
                         ?> 
@@ -63,11 +68,16 @@
                             <th><?php echo $preparado['nombre'] ?></th>
                             <th><?php echo number_format($preparado['precio'], 0, ',', '.') ?></th>
                             <th><?php echo $nombre_familia ?></th>
+                            <th><?php echo $categoria ?></th>
                             <th>
                             <?php
                               $costo_preparado = 0;
+                              
+                              if(count($producto_preparados) > 0){
+                               
                               foreach ($producto_preparados as $key => $prod_prep) {
                                 $nombre_producto = get_producto($prod_prep['producto_id']);
+
                             ?>  
                                 <?php 
                                   $costo_asociado = get_costo_asociado($prod_prep['cantidad'], $nombre_producto['PRODUCTO_COSTO'], $nombre_producto['PRODUCTO_CAPACIDADPORUNIDAD']);
@@ -77,7 +87,9 @@
                                 " ".$nombre_producto['PRODUCTO_NOMBRE'].
                                 
                                 "<br>" ?>
-                            <?php } ?>
+                            <?php }
+                                }
+                             ?>
                             </th>
                             <?php if($_SESSION['tipo'] == 1){ ?>
                               <th><?php echo number_format($costo_preparado, 0, ',', '.') ?></th>

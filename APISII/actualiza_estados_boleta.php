@@ -7,7 +7,7 @@ include("../intranet/funciones/controlador.php");
 
 function actualiza_estados(){
 	$pendientes = get_pendientes_estado();
-	$empresa = '76324007-K';
+	$empresa = '76825194-0';
 	foreach ($pendientes as $key => $pendiente) {
 		$estado = get_estado_by_trackid($empresa, $pendiente['trackid']);
 		if($estado['estadistica'][0]['aceptados'] == 1){

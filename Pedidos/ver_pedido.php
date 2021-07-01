@@ -1,4 +1,7 @@
-<?php session_start();   ?>
+<?php session_start();   
+//error_reporting(E_ALL);
+//ini_set('display_errors', '1');
+?>
 <!DOCTYPE html>
 <html>
 
@@ -94,7 +97,7 @@
                                   $desc = 0;
                                   $preparado = get_preparados_id($venta_detalle['preparado_id']);
                                   $descuento_familia = get_descuento_familia_by_familia_id($preparado['PREPARADOS_FAMILIA']);
-                                  if($descuento_familia['descuento'] != ""){
+                                  if($descuento_familia != 0){
                                     $dentro_horario = dentro_de_horario($descuento_familia['hora_inicial'], $descuento_familia['hora_final'], $venta_detalle['hora']);
                                     if($dentro_horario == 1){
                                       $desc = $descuento_familia['descuento'] * $venta_detalle['cantidad'];

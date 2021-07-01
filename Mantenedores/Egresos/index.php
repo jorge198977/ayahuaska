@@ -69,6 +69,7 @@ if(!validaringreso())
                             <th scope="col">MONTO</th>
                             <th scope="col">MOTIVO</th>
                             <th scope="col">FECHA</th>
+                            <th scope="col">HORA</th>
                             <th scope="col">USUARIO</th>
                             <th scope="col">ACCION</th>
                           </tr>
@@ -81,7 +82,8 @@ if(!validaringreso())
                           <tr>
                             <th><?php echo number_format($egreso['monto'], 0, ',', '.') ?></th>
                             <th><?php echo $egreso['motivo'] ?></th>
-                            <th><?php echo fecha_bd_normal($egreso['fecha'])." / ".$egreso['hora'] ?></th>
+                            <th><?php echo $egreso['fecha'] ?></th>
+                             <th><?php echo $egreso['hora'] ?></th>
                             <th><?php echo $usuario['nombre']." ".$usuario['apellido'];  ?></th>
                             <th>
                                 <?php if(($_SESSION['tipo'] == 1)){ ?>
@@ -166,13 +168,20 @@ if(!validaringreso())
   
   <script src="../../intranet/plugins/datatables/jquery.dataTables.min.js"></script>
 
-  <!-- page script -->
-  <script>
-    $(function () {
-       $("#example1").DataTable();
+  <script type="text/javascript">
+    $(document).ready( function () {
+     // $('#myTable').DataTable();
+       $('#example1').DataTable(
+           {
+               "order": [[ 2, "desc" ]],
+               "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+          }
+        );
 
-    });
-  </script>  
+     });
+  </script> 
 
 </body>
 

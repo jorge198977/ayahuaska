@@ -2,14 +2,52 @@
 include("mysql/conecta.php");
 require('fpdf/fpdf.php');
 //include("../phpmailer/sendmail.php");
-//error_reporting(E_ALL);
-//ini_set('display_errors', '1');
-
-
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
 
 
 conecta();
 date_default_timezone_set('America/Santiago');
+
+
+
+// if(isset($_GET['get_delivery'])){
+// 	$sql = "select PREPARADOS_ID, PREPARADOS_NOMBRE from ayahuaska.preparados where categoria_id = 33 or categoria_id =34";
+// 	$res = mysql_query($sql);
+// 	while ($dat = mysql_fetch_array($res)) {
+// 		$renombrado = str_replace("DELIVERY","D",$dat['PREPARADOS_NOMBRE']);
+// 		if($dat['PREPARADOS_NOMBRE'] != "CARGO POR DELIVERY"){
+// 			echo "ID->".$dat['PREPARADOS_ID'].", NOMBRE->".$dat['PREPARADOS_NOMBRE'].", RENOMBRE->".$renombrado.  "<br>";
+// 			echo $sqlu = "update ayahuaska.preparados set PREPARADOS_NOMBRE='".$renombrado."' where PREPARADOS_ID=".$dat['PREPARADOS_ID']."";
+// 			echo "<br>";
+// 			mysql_query($sqlu);	
+// 		}
+		
+// 	}
+// }
+
+if(isset($_GET['valida_envio_reporte_rcof'])){
+	$res = valida_envio_rcof(date("Y-m-d"));
+	if($res == 0)
+		envia_correo_notifica();
+}
+
+
+function valida_envio_rcof($fecha){
+	$sql = "select id from ayahuaska.rcofs where fecha='$fecha'";
+	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	return $tot;
+}
+
+
+function envia_correo_notifica(){
+	$to = "jorgeuls19@gmail.com";
+	$subject = "ERROR ENVIO RCOF AYAHUASKA";
+	$message = "No se ha enviado reporte rcofs de empresa AYAHUASKA, revisar";
+	 
+	mail($to, $subject, $message);
+}
 
 
 
@@ -351,7 +389,7 @@ function ingresa_nueva_forma_pago2($vta_id, $totalconprop, $mesa_id, $total, $mo
 	    else{
 	    	$nombre_socio = "";
 	    }
-	    valida_stock_critico($vta_id);
+	    //valida_stock_critico($vta_id);
 		
 		$mesa = get_mesa_by_id($mesa_id);
 		$formapago = get_forma_pago_id($forma_pago_id);
@@ -716,7 +754,7 @@ function get_all_preparados(){
 	if($tot > 0){
 		while ($dat = mysql_fetch_array($res)) {
 			$preparados[] = array('id' => $dat['PREPARADOS_ID'], 'nombre' => $dat['PREPARADOS_NOMBRE'],
-							'familia' => $dat['PREPARADOS_FAMILIA'], 'precio' => $dat['PREPARADOS_PRECIO']);
+							'familia' => $dat['PREPARADOS_FAMILIA'], 'precio' => $dat['PREPARADOS_PRECIO'], 'categoria_id' => $dat['categoria_id']);
 		}
 	}
 	return $preparados;
@@ -730,7 +768,8 @@ function get_preparados_familia($familia){
 	if($tot > 0){
 		while ($dat = mysql_fetch_array($res)) {
 			$preparados[] = array('id' => $dat['PREPARADOS_ID'], 'nombre' => $dat['PREPARADOS_NOMBRE'],
-							'familia' => $dat['PREPARADOS_FAMILIA'], 'precio' => $dat['PREPARADOS_PRECIO']);
+							'familia' => $dat['PREPARADOS_FAMILIA'], 'precio' => $dat['PREPARADOS_PRECIO'],
+							'orden' => $dat['orden']);
 		}
 	}
 	return $preparados;
@@ -751,9 +790,9 @@ function get_preparado_nombre($nombre){
 }
 
 
-function inserta_producto_preparado($nombre, $precio, $familia, $es_happy, $es_cocina){
-	$sql = "insert into ayahuaska.preparados (PREPARADOS_NOMBRE, PREPARADOS_FECHA, PREPARADOS_FAMILIA, PREPARADOS_PRECIO, es_happy, es_cocina)
-			values ('".$nombre."', '".date("Y-m-d")."', ".$familia.", ".$precio.", ".$es_happy.", ".$es_cocina.")";
+function inserta_producto_preparado($nombre, $precio, $familia, $es_happy, $es_cocina, $categoria, $estado, $descripcion){
+	$sql = "insert into ayahuaska.preparados (PREPARADOS_NOMBRE, PREPARADOS_FECHA, PREPARADOS_FAMILIA, PREPARADOS_PRECIO, es_happy, es_cocina, categoria_id, estado, descripcion)
+			values ('".$nombre."', '".date("Y-m-d")."', ".$familia.", ".$precio.", ".$es_happy.", ".$es_cocina.", ".$categoria.", ".$estado.", '".$descripcion."')";
 	if(mysql_query($sql)){
 		return true;
 	}
@@ -762,8 +801,10 @@ function inserta_producto_preparado($nombre, $precio, $familia, $es_happy, $es_c
 	}
 }
 
-function actualiza_producto_preparado($nombre, $precio, $id, $es_happy, $es_cocina, $familia, $categoria_id){
-	$sql = "update ayahuaska.preparados set PREPARADOS_NOMBRE = '".$nombre."', PREPARADOS_FAMILIA = ".$familia.", PREPARADOS_PRECIO = ".$precio.", es_happy = ".$es_happy.", es_cocina = ".$es_cocina.", categoria_id=".$categoria_id."
+function actualiza_producto_preparado($nombre, $precio, $id, $es_happy, $es_cocina, $familia, $categoria_id, $estado, $descripcion, $orden){
+	if($orden == "")
+		$orden = 0;
+	$sql = "update ayahuaska.preparados set PREPARADOS_NOMBRE = '".$nombre."', PREPARADOS_FAMILIA = ".$familia.", PREPARADOS_PRECIO = ".$precio.", es_happy = ".$es_happy.", es_cocina = ".$es_cocina.", categoria_id=".$categoria_id.", estado=".$estado.", descripcion='".$descripcion."', orden = $orden
 			 where PREPARADOS_ID = ".$id."";
 	if(mysql_query($sql)){
 		return true;
@@ -1185,6 +1226,17 @@ function get_nombre_socio($id){
 	return $dat;
 }
 
+function get_nombre_socio2($id){
+	$sql = "select nombre from ayahuaska.socios where id = ".$id." ";
+	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot == 0){
+		return "";
+	}
+	$dat = mysql_fetch_array($res);
+	return $dat['nombre'];
+}
+
 function inserta_socio($rut, $nombre, $telefono){
 	$sql = "insert into ayahuaska.socios (rut, nombre, telefono)
 			values ('".$rut."', '".$nombre."', '".$telefono."')";
@@ -1389,6 +1441,10 @@ function get_venta_by_mesa_estado($mesa_id, $estado){
 function get_descuento_venta($venta_id){
 	$sql = "select monto from ayahuaska.descuentos_ventas where venta_id = ".$venta_id."";
 	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot == 0){
+		return 0;
+	}
 	$dat = mysql_fetch_array($res);
 	return $dat['monto'];
 }
@@ -1642,10 +1698,18 @@ function actualiza_ventas_detalles_all($venta_id, $nueva_venta_id, $max_npedido)
 function obtiene_total_venta($vta_id){
 	$total = 0;
 	$ventas_detalles = get_ventas_detalles_id($vta_id);
-	foreach ($ventas_detalles as $key => $venta_detalle) {
-		$preparado = get_preparados_id($venta_detalle['preparado_id']);
-		$total = $total + ($preparado['PREPARADOS_PRECIO'] * $venta_detalle['cantidad']);
+	if(is_array($ventas_detalles)){
+		foreach ($ventas_detalles as $key => $venta_detalle) {
+			$preparado = get_preparados_id($venta_detalle['preparado_id']);
+			$precio = 0;
+			if((is_array($preparado)) && ($preparado['PREPARADOS_PRECIO'] != "")){
+				$precio = $preparado['PREPARADOS_PRECIO'];
+			}
+			//echo "PREC->".$precio.", CANT->".$venta_detalle['cantidad'];
+			$total = $total + ($precio * $venta_detalle['cantidad']);
+		}
 	}
+	
 	return $total;
 }
 
@@ -1720,6 +1784,10 @@ function inserta_venta_propina($venta_id, $monto, $estado, $venta_pago_id){
 function get_venta_propina($venta_id, $venta_pago_id){
 	$sql = "select * from ayahuaska.ventas_propinas where venta_id = ".$venta_id." and venta_pago_id = ".$venta_pago_id."";
 	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot == 0){
+		return 0;
+	}
 	$dat = mysql_fetch_array($res);
 	return $dat;
 }
@@ -1733,8 +1801,13 @@ function get_vta_id($fecha, $hora, $estado, $mesa, $usuario){
 }
 
 function get_vta_socio_id($venta_id){
+	$socio = "";
 	$sql = "select socio_id from ayahuaska.ventas_socios where venta_id = ".$venta_id."";
 	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot == 0){
+		return $socio;
+	}
 	$dat = mysql_fetch_array($res);
 	return $dat['socio_id'];
 }
@@ -2112,7 +2185,7 @@ function actualiza_stock_onzas2($idProducto, $stockActual, $stockAumenta, $stock
 // MODERADOR FORMA DE PAGO
 function get_all_formas_pagos(){
 	$formas_pagos = null;
-	$sql = "select * from ayahuaska.formas_pagos where (id !=5 and id != 6) order by descripcion asc";
+	$sql = "select * from ayahuaska.formas_pagos where (id !=5) order by descripcion asc";
 	$res = mysql_query($sql);
 	$tot = mysql_num_rows($res);
 	if($tot > 0){
@@ -2335,17 +2408,29 @@ function elimina_pie($id){
 	}
 }
 
-function elimina_pedido($venta_id, $mesa_id, $motivo, $usuario_id){
+function elimina_pedido($venta_id, $mesa_id, $motivo, $usuario_id, $merma){
 	venta_cambia_estado($venta_id, -1);
 	actualiza_mesa($mesa_id, 0);
 	elimina_preparados_happy_by_id($venta_id);
 	elimina_vta_socio($venta_id);
 	inserta_motivo_eliminacion($venta_id, $motivo, $usuario_id);
 	// FALTA AGREGAR LA REPOSICION DEL STOCK
-	descuentaStock_preparados_revertirByIdVenta($venta_id);
+	if($merma == 0){
+		descuentaStock_preparados_revertirByIdVenta($venta_id);
+		actualiza_venta_merma($venta_id);
+	}
 
 	return true;
 }
+
+
+function actualiza_venta_merma($id){
+	$sql = "update ayahuaska.ventas set merma =1 where id=$id";
+	mysql_query($sql);
+}
+
+
+
 
 function get_all_compras(){
 	$compras = null;
@@ -2591,8 +2676,24 @@ function get_descuento_familia_by_id($id){
 function get_descuento_familia_by_familia_id($familia_id){
 	$sql = "select * from ayahuaska.descuento_familia where familia_id = ".$familia_id."";
 	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot == 0){
+		return 0;
+	}
 	$dat = mysql_fetch_array($res);
-	return $dat;
+	return $dat['descuento'];
+}
+
+
+function get_descuento_familia_by_familia_id2($familia_id){
+	$sql = "select * from ayahuaska.descuento_familia where familia_id = ".$familia_id."";
+	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot == 0){
+		return 0;
+	}
+	$dat = mysql_fetch_array($res);
+	return $dat['descuento'];
 }
 
 function actualiza_descuento_familia($horai, $horaf, $descuento, $familia_id, $id){
@@ -2642,7 +2743,7 @@ function get_cierres_por_fecha_hora($fecha_inicial, $fecha_final){
 	$cierres = null;
 	$sql = "select ayahuaska.ventas_pagos.valor, ayahuaska.ventas.fecha as venta_fecha, ayahuaska.ventas.hora as venta_hora,
 			ayahuaska.ventas_pagos.venta_id, ayahuaska.ventas_pagos.forma_pago_id, ayahuaska.ventas.usuario_id, 
-			ayahuaska.ventas.boleta, 
+			ayahuaska.ventas.boleta, ayahuaska.ventas.canje,
 			ayahuaska.ventas.mesa_id, ayahuaska.ventas.estado, ayahuaska.ventas.fecha_full, ayahuaska.ventas_pagos.id as venta_pago_id
 			from ayahuaska.ventas_pagos inner join ayahuaska.ventas
             on (ventas_pagos.venta_id = ventas.id)
@@ -2656,7 +2757,8 @@ function get_cierres_por_fecha_hora($fecha_inicial, $fecha_final){
 									, 'hora' =>$dat['venta_hora'] , 'venta_id' =>$dat['venta_id']
 									, 'forma_pago_id' =>$dat['forma_pago_id'], 'usuario_id' =>$dat['usuario_id']
 									, 'boleta' =>$dat['boleta'], 'mesa_id' =>$dat['mesa_id']
-									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id']);
+									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id'],
+									'canje' => $dat['canje']);
 		}
 	}
 
@@ -2667,7 +2769,7 @@ function get_cierres_por_fecha_hora_usuario($fecha_inicial, $fecha_final, $usuar
 	$cierres = null;
 	$sql = "select ayahuaska.ventas_pagos.valor, ayahuaska.ventas.fecha as venta_fecha, ayahuaska.ventas.hora as venta_hora,
 			ayahuaska.ventas_pagos.venta_id, ayahuaska.ventas_pagos.forma_pago_id, ayahuaska.ventas.usuario_id, 
-			ayahuaska.ventas.boleta, 
+			ayahuaska.ventas.boleta, ayahuaska.ventas.canje,
 			ayahuaska.ventas.mesa_id, ayahuaska.ventas.estado, ayahuaska.ventas.fecha_full, ayahuaska.ventas_pagos.id as venta_pago_id
 			from ayahuaska.ventas_pagos inner join ayahuaska.ventas
             on (ventas_pagos.venta_id = ventas.id)
@@ -2682,7 +2784,8 @@ function get_cierres_por_fecha_hora_usuario($fecha_inicial, $fecha_final, $usuar
 									, 'hora' =>$dat['venta_hora'] , 'venta_id' =>$dat['venta_id']
 									, 'forma_pago_id' =>$dat['forma_pago_id'], 'usuario_id' =>$dat['usuario_id']
 									, 'boleta' =>$dat['boleta'], 'mesa_id' =>$dat['mesa_id']
-									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id']);
+									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id'],
+								'canje' => $dat['canje']);
 		}
 	}
 
@@ -2693,7 +2796,7 @@ function get_cierres_por_fecha_hora2($fecha_inicial1, $fecha_final1, $fecha_inic
 	$cierres = null;
 	$sql = "select ayahuaska.ventas_pagos.valor, ayahuaska.ventas.fecha as venta_fecha, ayahuaska.ventas.hora as venta_hora,
 			ayahuaska.ventas_pagos.venta_id, ayahuaska.ventas_pagos.forma_pago_id, ayahuaska.ventas.usuario_id, 
-			ayahuaska.ventas.boleta, 
+			ayahuaska.ventas.boleta,  ayahuaska.ventas.canje,
 			ayahuaska.ventas.mesa_id, ayahuaska.ventas.estado, ayahuaska.ventas.fecha_full, ayahuaska.ventas_pagos.id as venta_pago_id from ayahuaska.ventas_pagos inner join ayahuaska.ventas
             on (ventas_pagos.venta_id = ventas.id)
             where ((ventas_pagos.fecha_full between '".$fecha_inicial1."' and '".$fecha_final1."' or
@@ -2707,7 +2810,7 @@ function get_cierres_por_fecha_hora2($fecha_inicial1, $fecha_final1, $fecha_inic
 									, 'hora' =>$dat['hora'] , 'venta_id' =>$dat['venta_id']
 									, 'forma_pago_id' =>$dat['forma_pago_id'], 'usuario_id' =>$dat['usuario_id']
 									, 'boleta' =>$dat['boleta'], 'mesa_id' =>$dat['mesa_id']
-									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id']);
+									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id'], 'canje' =>$dat['canje']);
 		}
 	}
 
@@ -3710,7 +3813,7 @@ function get_ventas_eliminadas_by_fecha($fecha, $estado){
 			$ventas[] = array('id' => $dat['id'], 'fecha' =>$dat['fecha']
 									, 'hora' =>$dat['hora'] , 'estado' =>$dat['estado']
 									, 'boleta' =>$dat['boleta'], 'mesa_id' =>$dat['mesa_id']
-									, 'usuario_id' =>$dat['usuario_id'], 'fecha_full' =>$dat['fecha_full']);
+									, 'usuario_id' =>$dat['usuario_id'], 'fecha_full' =>$dat['fecha_full'], 'canje' => $dat['canje']);
 		}
 	}
 
@@ -4262,6 +4365,7 @@ function get_cantidad_venta_temporal($venta_id, $preparado_id, $estado, $npedido
 	return $dat['cant'];
 }
 
+
 function hay_pago_temporal($venta_id, $estado){
 	$sql = "select cantidad from ayahuaska.temp_ventas_detalles where venta_id = ".$venta_id." and estado = ".$estado."";
 	$res = mysql_query($sql);
@@ -4750,7 +4854,7 @@ function actualiza_cc($cc, $onzas, $id){
 
 function get_all_egresos(){
 	$datos = null;
-	$sql = "select * from ayahuaska.egresos order by id asc";
+	$sql = "select * from ayahuaska.egresos order by fecha desc";
 	$res = mysql_query($sql);
 	$tot = mysql_num_rows($res);
 	if($tot > 0){
@@ -5104,7 +5208,7 @@ function get_boletas_by_fecha($folio, $dia, $mes, $anio){
 }
 
 function get_xml_by_folio($folio, $empresa){
-	$sql = "select xml from ayahuaska.folios_asignas where (desde<=$folio and hasta>=$folio) and empresa='$empresa'";
+	echo $sql = "select xml from ayahuaska.folios_asignas where (desde<=$folio and hasta>=$folio) and empresa='$empresa'";
 	$res = mysql_query($sql);
 	$dat = mysql_fetch_array($res);
 	return $dat['xml'];
@@ -5301,7 +5405,7 @@ function inserta_folio($folio, $total, $fecha, $hora, $empresa, $trackid, $estad
 
 
 function inserta_rcof($cant, $fecha, $hora, $trackid){
-	echo $sql = "insert into ayahuaska.rcofs(cantidad, fecha, hora, trackid) values($cant, '$fecha', '$hora', $trackid)";
+	 $sql = "insert into ayahuaska.rcofs(cantidad, fecha, hora, trackid) values($cant, '$fecha', '$hora', $trackid)";
 	if(mysql_query($sql)){
 		return true;
 	}
@@ -5402,13 +5506,14 @@ function ingresa_boleta_elec($vta_id, $totalconprop, $mesa_id, $total, $monto_pa
 	    else{
 	    	$nombre_socio = "";
 	    }
-	    valida_stock_critico($vta_id);
+	    //valida_stock_critico($vta_id);
 		
 		$mesa = get_mesa_by_id($mesa_id);
 		$formapago = get_forma_pago_id($forma_pago_id);
 
 		include("../../APISII/genera_boleta_electronica.php");
 		$detalles = array();
+		$cargo_delivery = 0;
 		$ventas_detalles = get_ventas_detalles_id($vta_id);
 		foreach ($ventas_detalles as $key => $venta_detalle) {
           $cantidad_temporal = get_cantidad_venta_temporal($vta_id, $venta_detalle['preparado_id'], 0, $venta_detalle['npedido']);
@@ -5417,17 +5522,30 @@ function ingresa_boleta_elec($vta_id, $totalconprop, $mesa_id, $total, $monto_pa
           }
           if($cantidad_temporal < $venta_detalle['cantidad']){
 
-	          $preparado = get_preparados_id($venta_detalle['preparado_id']);
-	          //VER CIGARROS
-	          $familia = $preparado['PREPARADOS_FAMILIA'];
-	          $detalles[] = array('nombre' => $preparado['PREPARADOS_NOMBRE'], 'cantidad' => $venta_detalle['cantidad']-$cantidad_temporal, 'precio' => $preparado['PREPARADOS_PRECIO'], 'familia' =>$familia);
+		        $preparado = get_preparados_id($venta_detalle['preparado_id']);
+		          //VER CIGARROS
+		        //$familia = $preparado['PREPARADOS_FAMILIA'];		          
 
-	         
-	       }
+		       	if($preparado['PREPARADOS_NOMBRE'] != "CARGO POR DELIVERY"){
+		        	$detalles[] = array('nombre' => $preparado['PREPARADOS_NOMBRE'], 'cantidad' => $venta_detalle['cantidad']-$cantidad_temporal, 'precio' => $preparado['PREPARADOS_PRECIO'], 'familia' =>$familia);
+		          		
+		        }
+		        else{
+		        	$cargo_delivery = 1;
+		         
+		       	}
+	        }
         }
 
+        // foreach ($ventas_detalles as $key => $venta_detalle) {
+	       //    $preparado = get_preparados_id($venta_detalle['preparado_id']);
+	       //    $familia = $preparado['PREPARADOS_FAMILIA'];
+	       //    $detalles[] = array('nombre' => $preparado['PREPARADOS_NOMBRE'], 'cantidad' => $venta_detalle['cantidad'], 'precio' => $preparado['PREPARADOS_PRECIO'], 'familia' =>$familia);
+	       
+        // }
+
         
-        //$folio = create_boleta_electronica($detalles, $vta_id, $propina, $descuento);
+        $folio = create_boleta_electronica($detalles, $vta_id, $propina, $descuento, $cargo_delivery);
 
 
 
@@ -5435,19 +5553,22 @@ function ingresa_boleta_elec($vta_id, $totalconprop, $mesa_id, $total, $monto_pa
 
 
         //NUEVO ENVIAR XML Y FOLIO PARA GENERAR PDF EN CLIENTE FINAL
-  //       $fecha_hoy = date("Y-m-d");
-  //       $urlxml = "/var/www/realdev.cl/ayahuaska/APISII/xml/boletas/ayahuaska/".$fecha_hoy."/".$folio."_boleta.xml";
-  //       $codigo_comercial = "REAL002";
-  //       $comercio = "ayahuaska";
-  //       $url = "https://api.notifier.realdev.cl/api/solicita_boleta_electronica";
+        $fecha_hoy = date("Y-m-d");
+        $urlxml = "/var/www/realdev.cl/ayahuaska/APISII/xml/boletas/AYAHUASKA/".$fecha_hoy."/".$folio."_boleta.xml";
+        $codigo_comercial = "REAL002";
+        $comercio = "ayahuaska";
+        $url = "https://api.notifier.realdev.cl/api/solicita_boleta_electronica";
 
-	 //    $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'ayahuaska',
-	 //     	'impresora' => 'CAJA',	
-	 //     	'url' => $urlxml
-	 //    );
-	 //    //print_r($parametrosdatos);
-		// $data = postURL($url, $parametrosdatos);
-		// $data = json_decode($data);
+        $dir = "David Perry 45";
+
+	    $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'ayahuaska',
+	     	'impresora' => 'CAJA',	
+	     	'url' => $urlxml,
+	     	'direccion' => $dir
+	    );
+	    //print_r($parametrosdatos);
+		$data = postURL($url, $parametrosdatos);
+		$data = json_decode($data);
 
 	    return true;
 	}
@@ -5503,28 +5624,35 @@ function ingresa_boleta_elec_temp($vta_id, $total, $mesa_id, $total_temporal, $p
 
 	    include("../../APISII/genera_boleta_electronica.php");
 		$detalles = array();
+		$cargo_delivery = 0;
 		$ventas_detalles = get_ventas_detalles_temporal_id($vta_id);
 		foreach ($ventas_detalles as $key => $venta_detalle) {
 	          $preparado = get_preparados_id($venta_detalle['preparado_id']);
 	          $familia = $preparado['PREPARADOS_FAMILIA'];
+
+	          //SI ES DELIVERY
+	          if($familia == 160)
+	          	$cargo_delivery = 1;
 	          $detalles[] = array('nombre' => $preparado['PREPARADOS_NOMBRE'], 'cantidad' => $venta_detalle['cantidad'], 'precio' => $preparado['PREPARADOS_PRECIO'], 'familia' =>$familia);
 	       
         }
 
-        $folio = create_boleta_electronica($detalles, $vta_id, $propina, $descuento);
+        $folio = create_boleta_electronica($detalles, $vta_id, $propina, 0, $cargo_delivery);
 
 
         //NUEVO ENVIAR XML Y FOLIO PARA GENERAR PDF EN CLIENTE FINAL
-  //       $fecha_hoy = date("Y-m-d");
-  //       $urlxml = "/var/www/realdev.cl/ayahuaska/APISII/xml/boletas/ayahuaska/".$fecha_hoy."/".$folio."_boleta.xml";
-  //       $codigo_comercial = "REAL002";
-  //       $url = "https://api.notifier.realdev.cl/api/solicita_boleta_electronica";
-		// $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'ayahuaska',
-	 //     	'impresora' => 'CAJA',	
-	 //     	'url' => $urlxml
-	 //    );
-		// $data = postURL($url, $parametrosdatos);
-		// $data = json_decode($data);
+        $fecha_hoy = date("Y-m-d");
+        $urlxml = "/var/www/realdev.cl/ayahuaska/APISII/xml/boletas/AYAHUASKA/".$fecha_hoy."/".$folio."_boleta.xml";
+        $codigo_comercial = "REAL002";
+        $url = "https://api.notifier.realdev.cl/api/solicita_boleta_electronica";
+        $dir = "David Perry 45";
+		$parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'ayahuaska',
+	     	'impresora' => 'CAJA',	
+	     	'url' => $urlxml,
+	     	'direccion' => $dir
+	    );
+		$data = postURL($url, $parametrosdatos);
+		$data = json_decode($data);
 
         
 	    return true;
@@ -5698,7 +5826,7 @@ function get_all_categorias(){
 	$tot = mysql_num_rows($res);
 	if($tot > 0){
 		while($dat = mysql_fetch_array($res)){
-			$familias[] = array('id' => $dat['id'], 'nombre' => $dat['nombre']);
+			$familias[] = array('id' => $dat['id'], 'nombre' => $dat['nombre'], 'estado' => $dat['estado'], 'posicion' => $dat['posicion']);
 		}
 	}
 	return $familias;
@@ -5715,8 +5843,8 @@ function get_categoria_datos($id){
 
 
 
-function ingresa_nueva_categoria($nombre){
-	$sql = "insert into ayahuaska.categorias (nombre) values ('".$nombre."')";
+function ingresa_nueva_categoria($nombre, $estado, $posicion){
+	$sql = "insert into ayahuaska.categorias (nombre, estado, posicion) values ('".$nombre."', ".$estado.", ".$posicion.")";
 	if(mysql_query($sql)){
 		return true;
 	}
@@ -5735,8 +5863,8 @@ function elimina_categoria($id){
 	}
 }
 
-function actualiza_categoria($nombre, $id){
-	$sql = "update ayahuaska.categorias set nombre = '".$nombre."' where id = ".$id."";
+function actualiza_categoria($nombre, $estado, $id, $posicion){
+	$sql = "update ayahuaska.categorias set nombre = '".$nombre."', estado=".$estado." , posicion=".$posicion." where id = ".$id."";
 	if(mysql_query($sql)){
 		return true;
 	}
@@ -5847,5 +5975,150 @@ function top_garzones(){
 	return $ventas;
 
 }
+
+
+function get_categoria_nombre($id){
+	$sql = "select nombre from ayahuaska.categorias where id=".$id."";
+	$res = mysql_query($sql);
+	$dat = mysql_fetch_array($res);
+	return $dat['nombre'];
+}
+
+
+function get_estado_preparado_by_id($preparado_id){
+	$sql = "select estado from ayahuaska.preparados where PREPARADOS_ID=$preparado_id";
+	$res = mysql_query($sql);
+	$dat = mysql_fetch_array($res);
+	return $dat['estado'];
+}
+
+
+function get_imagen_preparado_by_id($id){
+	$sql = "select imagen from ayahuaska.preparados where PREPARADOS_ID = $id ";
+	$res = mysql_query($sql);
+	$dat = mysql_fetch_array($res);
+	return $dat['imagen'];
+}
+
+
+
+function actualiza_venta_canje($id, $estado){
+	echo $sql = "update ayahuaska.ventas set canje=$estado where id=$id";
+	$res = mysql_query($sql);
+}
+
+
+
+function get_all_opiniones(){
+	$opiniones = null ;
+	$sql = "select * from ayahuaska.opiniones order by id desc";
+	$res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot > 0){
+		while ($dat = mysql_fetch_array($res)) {
+			$opiniones[] = array('id' => $dat['id'], 'nombre' => $dat['nombre'], 'texto' => $dat['texto'],
+							'fecha' => $dat['fecha'], 'hora' => $dat['hora']);
+		}
+	}
+	return $opiniones;
+}
+
+
+function elimina_opinion_by_id($id){
+	$sql = "delete from ayahuaska.opiniones where id=$id";
+	if(mysql_query($sql)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+
+
+
+function get_stocks_criticos(){
+	$datos = null;
+	$query="select * from ayahuaska.producto";
+    $result=mysql_query($query);
+    $tot=mysql_num_rows($result);
+    if ($tot!=0) {
+      while ($dat=mysql_fetch_array($result)) {
+        $fechaHoy = fecha_hoy_bd();
+        if(stock_critico($dat['PRODUCTO_ID'])){
+        	$producto = get_id_producto_by_id($dat['PRODUCTO_ID']);
+        	$datos[] = array('id' => $dat['PRODUCTO_ID'], 'nombre' => $producto['PRODUCTO_NOMBRE'],
+							'stock' => stockUnidadBy_idProducto($dat['PRODUCTO_ID']), 'min' =>$producto['PRODUCTO_STOCKMINIMO']);
+      	}
+      }
+    }
+  	return $datos;
+  }
+
+
+
+
+
+
+  function get_ventas_fecha_merma($fecha){
+	$cierres = null;
+	// $sql = "select ayahuaska.ventas_pagos.valor, ayahuaska.ventas.fecha as venta_fecha, ayahuaska.ventas.hora as venta_hora,
+	// 		ayahuaska.ventas_pagos.venta_id, ayahuaska.ventas_pagos.forma_pago_id, ayahuaska.ventas.usuario_id, 
+	// 		ayahuaska.ventas.boleta, 
+	// 		ayahuaska.ventas.mesa_id, ayahuaska.ventas.estado, ayahuaska.ventas.fecha_full
+	// 		from ayahuaska.ventas_pagos inner join ayahuaska.ventas
+ //            on (ventas_pagos.venta_id = ventas.id)
+ //            where ventas_pagos.fecha like '".$fecha."'
+ //            and ventas.estado <> -1 order by ventas_pagos.venta_id asc";
+
+	$sql = "select ayahuaska.ventas.id as venta_id, ayahuaska.ventas.fecha as venta_fecha, ayahuaska.ventas.hora as venta_hora, 
+			ayahuaska.ventas.mesa_id, ayahuaska.ventas.usuario_id
+			from ayahuaska.ventas 
+			where ayahuaska.ventas.estado = -1 and ayahuaska.ventas.merma=1 and ayahuaska.ventas.fecha like '".$fecha."'
+			order by ayahuaska.ventas.id asc";
+
+    $res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot > 0){
+		while($dat = mysql_fetch_array($res)){
+			$cierres[] = array('fecha' => $dat['venta_fecha']
+									, 'hora' =>$dat['venta_hora'] , 'venta_id' =>$dat['venta_id'],
+									'mesa_id' =>$dat['mesa_id'], 'usuario_id' =>$dat['usuario_id']
+									);
+		}
+	}
+
+	return $cierres;
+}
+
+
+
+
+function get_cierres_por_fecha_merma($fecha_inicial, $fecha_final){
+	$cierres = null;
+	 $sql = "select ayahuaska.ventas_pagos.valor, ayahuaska.ventas.fecha as venta_fecha, ayahuaska.ventas.hora as venta_hora,
+			ayahuaska.ventas_pagos.venta_id, ayahuaska.ventas_pagos.forma_pago_id, ayahuaska.ventas.usuario_id, 
+			ayahuaska.ventas.boleta, ayahuaska.ventas.canje,
+			ayahuaska.ventas.mesa_id, ayahuaska.ventas.estado, ayahuaska.ventas.fecha_full, ayahuaska.ventas_pagos.id as venta_pago_id
+			from ayahuaska.ventas_pagos inner join ayahuaska.ventas
+            on (ventas_pagos.venta_id = ventas.id)
+            where ((ventas_pagos.fecha between '".$fecha_inicial."' and '".$fecha_final."'))
+            and ventas.estado <> -1 and ventas.canje = 1 order by ventas_pagos.venta_id asc";
+    $res = mysql_query($sql);
+	$tot = mysql_num_rows($res);
+	if($tot > 0){
+		while($dat = mysql_fetch_array($res)){
+			$cierres[] = array('valor' => $dat['valor'], 'fecha' =>$dat['venta_fecha']
+									, 'hora' =>$dat['venta_hora'] , 'venta_id' =>$dat['venta_id']
+									, 'forma_pago_id' =>$dat['forma_pago_id'], 'usuario_id' =>$dat['usuario_id']
+									, 'boleta' =>$dat['boleta'], 'mesa_id' =>$dat['mesa_id']
+									, 'estado' =>$dat['estado'], 'fecha_full' =>$dat['fecha_full'], 'venta_pago_id' =>$dat['venta_pago_id'],
+									'canje' => $dat['canje']);
+		}
+	}
+
+	return $cierres;
+}
+
 
 ?>

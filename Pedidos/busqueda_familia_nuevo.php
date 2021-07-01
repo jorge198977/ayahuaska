@@ -22,10 +22,10 @@ $vta_id = $_POST['vta_id'];
 $npedid = $_POST['npedid'];
 if(isset($_POST['parametros'])){
 	$dato = $_POST['parametros'];
-	$sql = "select * from turquesa.familias where nombre like '".$dato."%' order by nombre asc";
+	$sql = "select * from ayahuaska.familias where nombre like '".$dato."%' order by nombre asc";
 }
 else{
-	$sql = "select * from turquesa.familias order by nombre asc";	
+	$sql = "select * from ayahuaska.familias order by nombre asc";	
 }
 
 $res = mysql_query($sql);

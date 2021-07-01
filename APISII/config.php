@@ -3,10 +3,10 @@
 function get_firma(){
     $config = [
         'firma' => [
-            'file' => '../../APISII/certs/7853564-4.pfx',
+            'file' => '../../APISII/certs/AYAHUASKA.pfx',
             //CAMBIAR A 'file' => '../APISII/certs/she.pfx', PARA CARGAR FOLIOS
             //'data' => '', // contenido del archivo certificado.p12
-            'pass' => 'juanaa11',
+            'pass' => 'ayahuaska1',
         ],
     ];
     return $config;
@@ -15,10 +15,10 @@ function get_firma(){
 function get_firma2(){
     $config = [
         'firma' => [
-            'file' => '../APISII/certs/7853564-4.pfx',
+            'file' => '../APISII/certs/AYAHUASKA.pfx',
             //CAMBIAR A 'file' => '../APISII/certs/she.pfx', PARA CARGAR FOLIOS
             //'data' => '', // contenido del archivo certificado.p12
-            'pass' => 'juanaa11',
+            'pass' => 'ayahuaska1',
         ],
     ];
     return $config;
@@ -57,22 +57,22 @@ function get_datos(){
 
     $datos = [
         'caratula' => [
-            'rut_envia' => '7853564-4',
+            'rut_envia' => '23374236-8', //REPRESENTANTE LEGAL
             'rut_recep' => '60803000-K',
-            'fecha_resol' => '2021-02-10', // CAMBIAR FECHA NUEVA
+            'fecha_resol' => '2021-03-22', // CAMBIAR FECHA NUEVA
             'nro_resol' => 99,
         ],
         'emisor' => [
-            'rut_emisor' => '76324007-K',
-            'razon_social' => 'SOCIEDAD COMERCIAL DLORENZO LTDA',
+            'rut_emisor' => '76825194-0',
+            'razon_social' => 'SOCIEDAD GASTRONOMICA AYAHUASKA SPA',
             'giro' => 'ACTIVIDADES DE RESTAURANTES Y DE SERVICIO MOVIL DE COMIDAS',
             'acteco' => 561000, //ACTIVIDAD ECONOMICA COD
             'dirorigen' => 'Ovalle',
             'comunaorigen' => 'Ovalle',
         ],
         'datos' => [
-            'rut' => '76324007-K',
-            'empresa' => 'SOCIEDAD COMERCIAL DLORENZO LTDA',
+            'rut' => '76825194-0',
+            'empresa' => 'SOCIEDAD GASTRONOMICA AYAHUASKA SPA',
             'rutemisor' => '7853564-4',
         ],
     ];

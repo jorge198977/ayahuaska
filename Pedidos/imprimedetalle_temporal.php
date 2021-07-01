@@ -42,15 +42,15 @@
       $ventas_detalles = get_ventas_detalles_temporal_id($movi);
 
       foreach ($ventas_detalles as $key => $venta_detalle){
-        $cantidad_temporal = get_cantidad_venta_temporal($movi, $venta_detalle['preparado_id'], 0, $venta_detalle['npedido']);
-        echo "CTEM->".$cantidad_temporal.", DE->".$venta_detalle['cantidad'];
-            // if($cantidad_temporal == ""){
-            //   $cantidad_temporal = 0;
-            // }
-            //if($cantidad_temporal < $venta_detalle['cantidad']){
+       // $cantidad_temporal = get_cantidad_venta_temporal($movi, $venta_detalle['preparado_id'], 0, $venta_detalle['npedido']);
+        // echo "CTEM->".$cantidad_temporal.", DE->".$venta_detalle['cantidad'];
+        //     if($cantidad_temporal == ""){
+        //       $cantidad_temporal = 0;
+        //     }
+        //     if($cantidad_temporal < $venta_detalle['cantidad']){
                $preparado = get_preparados_id($venta_detalle['preparado_id']);
                $precio = $preparado['PREPARADOS_PRECIO'];
-               $cantidad = $venta_detalle['cantidad'] - $cantidad_temporal;
+               $cantidad = $venta_detalle['cantidad'] ;
                $subtotal = $precio * $cantidad;
 
                $detalle[] = array('nombre' => utf8_encode($preparado['PREPARADOS_NOMBRE']) , 'cantidad' => $cantidad, 'precio' => $precio, 'subtotal' => $subtotal);
@@ -59,22 +59,22 @@
 
         $totales[] = array('totalsinprop' => $total, 'descuento' => $descuento, 'descuespecial' => $descu_especial, 'descpuntos' => $desc_puntos, 'total' => $desc, 'propina' =>$prop, 'totalconprop' => $tot);
 
+        print_r($detalle);
 
-
-      // $url = "https://api.notifier.realdev.cl/api/pre_cuenta";
-      // $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'TURQUESA', 'comuna' => 'Ovalle',
-      //     'direccion' => 'KM 5 Camino SOTAQUI',
-      //     'impresora' => 'CAJA',
-      //     'movimiento' => $movi,
-      //     'mesa' => $mesa,
-      //     'mesero' => $mesero,
-      //     'nombrecli' => $nombre_cliente,
-      //     'detalle' => $detalle,
-      //     'totales' => $totales);
-      // print_r($parametrosdatos);
-      // $data = postURL($url, $parametrosdatos);
-      // $data = json_decode($data);
-      // return $data;
+      $url = "https://api.notifier.realdev.cl/api/pre_cuenta";
+      $parametrosdatos = array('codcomercio' => $codigo_comercial, 'comercio' => 'AYAHUASKA', 'comuna' => 'Ovalle',
+          'direccion' => 'OVALLE',
+          'impresora' => 'CAJA',
+          'movimiento' => $movi,
+          'mesa' => $mesa,
+          'mesero' => $mesero,
+          'nombrecli' => $nombre_cliente,
+          'detalle' => $detalle,
+          'totales' => $totales);
+      print_r($parametrosdatos);
+      $data = postURL($url, $parametrosdatos);
+      $data = json_decode($data);
+      return $data;
     }
 
     header('Location:cerrarped.php?Mov='.$movi.'&Impreso');

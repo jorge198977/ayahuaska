@@ -42,7 +42,7 @@
                       <table id="example1" class="table table-flush">
                         <thead class="thead-light">
                           <tr>
-                            <th scope="col">SOCIO</th>
+                            <th scope="col">CLIENTE</th>
                             <th scope="col">MONTO</th>
                             <th scope="col">FECHA</th>
                             <th scope="col">HORA</th>

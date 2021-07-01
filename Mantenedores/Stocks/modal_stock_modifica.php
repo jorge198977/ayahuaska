@@ -4,7 +4,7 @@ $id = intval($_POST['id']);
 
 function get_productoById($idProducto){
   $productos = null;
-  $sql = "SELECT * from turquesa.producto WHERE PRODUCTO_ID={$idProducto}";
+  $sql = "SELECT * from ayahuaska.producto WHERE PRODUCTO_ID={$idProducto}";
   $res = mysql_query($sql);
   $tot = mysql_num_rows($res);
   if($tot > 0){
@@ -31,7 +31,7 @@ function get_productoById($idProducto){
 function get_familiaById2($idFamilia)
 {
   $familia = null;
-  $sql = "SELECT * from familias WHERE id={$idFamilia}";
+  $sql = "SELECT * from ayahuaska.familias WHERE id={$idFamilia}";
   $res = mysql_query($sql);
   $tot = mysql_num_rows($res);
   if($tot > 0){

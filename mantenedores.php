@@ -198,6 +198,32 @@
             <div class="col-xl-3 col-lg-6">
               <br>
               <div class="card card-stats mb-4 mb-xl-0">
+                <a href="Mantenedores/Categorias/index.php">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h3 class="card-title text-uppercase text-muted mb-0">CATEGORIAS</h3>
+                        <span class="h2 font-weight-bold mb-0"></span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                          <i class="fas fa-stream"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> </span>
+                      <span class="text-nowrap">Mantenedor categorias carta</span>
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <?php } ?>
+            <?php if(($_SESSION['tipo'] == 1) or ($_SESSION['tipo'] == 2)){ ?>
+            <div class="col-xl-3 col-lg-6">
+              <br>
+              <div class="card card-stats mb-4 mb-xl-0">
                 <a href="Mantenedores/Ccs/index.php">
                   <div class="card-body">
                     <div class="row">
@@ -246,7 +272,7 @@
               </div>
             </div>
             <?php } ?>
-            <?php if(($_SESSION['tipo'] == 1) or ($_SESSION['tipo'] == 2)){ ?>
+            <!-- <?php if(($_SESSION['tipo'] == 1) or ($_SESSION['tipo'] == 2)){ ?>
             <div class="col-xl-3 col-lg-6">
               <br>
               <div class="card card-stats mb-4 mb-xl-0">
@@ -271,7 +297,7 @@
                 </a>
               </div>
             </div>
-            <?php } ?>
+            <?php } ?> -->
             <?php if(($_SESSION['tipo'] == 1) or ($_SESSION['tipo'] == 2)){ ?>
             <div class="col-xl-3 col-lg-6">
               <br>
@@ -612,6 +638,34 @@
                 </a>
               </div>
             </div> 
+            <?php } ?>
+
+
+            <?php if(($_SESSION['tipo'] == 1) or ($_SESSION['tipo'] == 2)){ ?>
+            <div class="col-xl-3 col-lg-6">
+              <br>
+              <div class="card card-stats mb-4 mb-xl-0">
+                <a href="Mantenedores/Opiniones/index.php">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <h3 class="card-title text-uppercase text-muted mb-0">OPINIONES</h3>
+                        <span class="h2 font-weight-bold mb-0"></span>
+                      </div>
+                      <div class="col-auto">
+                        <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                          <i class="fas fa-book-open"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 mb-0 text-muted text-sm">
+                      <span class="text-success mr-2"><i class="fas fa-arrow-up"></i></span>
+                      <span class="text-nowrap">Revisa opiniones</span>
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
             <?php } ?>
 
 
